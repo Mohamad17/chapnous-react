@@ -1,13 +1,63 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: aviny;
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/aviny-700.woff') format('woff'),
+    url('./assets/fonts/aviny-700.woff2') format('woff2');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: dastevis;
+  font-style: normal;
+  font-weight: 500;
+  src: url('./assets/fonts/dastnevis-400.woff') format('woff'),
+    url('./assets/fonts/dastnevis-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Yekan';
+  src: url('./assets/fonts/Yekan.eot');
+  src: url('./assets/fonts/Yekan.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/Yekan.woff2') format('woff2'),
+    url('./assets/fonts/Yekan.woff') format('woff'),
+    url('./assets/fonts/Yekan.ttf') format('truetype'),
+    url('./assets/fonts/Yekan.svg#Yekan') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: fantezy;
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/sfcartoonisthandsc.ttf') format('truetype');
+}
+
+body {
+  font-family: Yekan !important;
+}
+
+.bg-purple-600 .dropdown-group .submenu {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  transition: max-height 0.6s ease;
+}
+
+.bg-purple-600 .dropdown-group .submenu.active {
+  visibility: visible;
+  height: auto;
+  max-height: 400px;
+  opacity: 1;
+  transition: max-height 0.7s, opacity 3s, visibility 4s ease;
+}
+
+@keyframes dropdown {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: auto;
+  }
 }
