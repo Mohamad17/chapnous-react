@@ -75,6 +75,15 @@ body {
 .sidbar-wrapp{
   width: 5vw;
 }
+@media only screen and (max-width: 640px) {
+  .sidbar-wrapp{
+    width: 0;
+    display: none;
+  }
+  .main .main-cotainer.without-sidebar{
+    width: 100%;
+  }
+}
 
 
 .main .main-cotainer.without-sidebar{
@@ -88,4 +97,8 @@ body {
   100% {
     width: 95vw;
   }
+}
+
+.myShadow{
+  box-shadow: -1px 3px 8px #56b4c0;
 }
