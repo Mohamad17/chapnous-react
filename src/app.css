@@ -4,5 +4,11 @@
     .mytransition{
         @apply transition-all duration-300 ease-in;
     }
+    .sidebarBtnOpen{
+        @apply absolute right-full flex justify-center items-center opacity-50 z-[250] bg-purple-800 py-6 px-1 hover:bg-purple-900 mytransition rounded-l-md;
+    }
+    .sidebarBtnClose{
+        @apply absolute right-full flex justify-center items-center opacity-50 z-[250] bg-purple-800 py-6 px-1 hover:bg-purple-900 mytransition rounded-l-md;
+    }
 }
 @tailwind utilities;

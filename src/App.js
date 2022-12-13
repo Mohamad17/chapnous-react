@@ -1,10 +1,15 @@
 import React from 'react';
 import Sidebar from './components/dashboard/sidebar/Sidebar';
+import Main from './components/dashboard/main/Main';
+import OpenSidebarProvider from './context/dashboard/OpenSidebarProvider';
 
 function App() {
   return (
-    <section className='grid grid-cols-12'>
-      <Sidebar />
+    <section className='bg-purple-600 flex main'>
+      <OpenSidebarProvider>
+        <Sidebar />
+        <Main />
+      </OpenSidebarProvider>
     </section>
   );
 }
