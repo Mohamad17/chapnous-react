@@ -4,6 +4,8 @@ import { IsOpenSideBar } from '../../../context/dashboard/OpenSidebarProvider';
 import logo from '../../../assets/images/logo.png';
 import userIcon from '../../../assets/images/manchester-united.jpeg';
 import { IsDarkMode } from '../../../context/dashboard/ThemePanelProvider';
+import { Route, Routes } from 'react-router-dom';
+import Home from '../../../pages/dashboard/Home';
 
 const Main = () => {
     const {isOpenSidebar} = useContext(IsOpenSideBar);
@@ -23,7 +25,7 @@ const Main = () => {
     }
 
     return (
-        <section className={isOpenSidebar?'w-full md:w-4/5 lg:w-5/6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[50px] main-cotainer py-2 px-4 lg:p-6':'bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[25px] myTransition py-2 px-4 lg:p-6 md:w-[95vw]'}>
+        <section className={isOpenSidebar?'flex flex-col gap-y-6 w-full md:w-4/5 lg:w-5/6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[50px] main-cotainer py-2 px-4 lg:p-6':'flex flex-col gap-y-6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[25px] myTransition py-2 px-4 lg:p-6 md:w-[95vw]'}>
             <div id="header" className='grid grid-cols-9 gap-y-3 items-center justify-between'>
                 {/* logo */}
                 <img src={logo} alt='logo' className={!isOpenSidebar? 'col-span-3 order-1 md:col-span-2 w-2/3 flex': 'hidden'} />
@@ -56,6 +58,9 @@ const Main = () => {
                     </section>
                 </div>
             </div>
+            <Routes>
+                <Route path='/dashboard/' element={<Home />} />
+            </Routes>
         </section>
     );
 };

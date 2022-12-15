@@ -27,6 +27,16 @@
 }
 
 @font-face {
+  font-family: 'sahel';
+  src: url('./assets/fonts/Sahel.eot');
+  src: url('./assets/fonts/Sahel.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/Sahel.woff') format('woff'),
+    url('./assets/fonts/Sahel.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: fantezy;
   font-style: normal;
   font-weight: 400;
@@ -35,6 +45,16 @@
 
 body {
   font-family: Yekan !important;
+}
+
+.aviny{
+  font-family: aviny !important;
+}
+.dastevis{
+  font-family: dastevis !important;
+}
+.sahel{
+  font-family: sahel !important;
 }
 
 .bg-purple-600 .dropdown-group .submenu {

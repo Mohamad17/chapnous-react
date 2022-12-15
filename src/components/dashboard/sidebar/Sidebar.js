@@ -39,10 +39,10 @@ const Sidebar = () => {
         let top = e.clientY;
         let id = e.currentTarget.id;
         let menuBox = document.getElementById(`${id}2`);
-        let windowHeight = window.innerHeight;
+        // let windowHeight = window.innerHeight;
         top = e.clientY - 25;
         menuBox.style.top = `${top}px`;
-        console.log(windowHeight - top)
+        console.log(e)
         // console.log(window.innerHeight)
         return setShowSubMenu(e.currentTarget.id);
     }
@@ -70,7 +70,7 @@ const Sidebar = () => {
                     'overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 text-white hidden md:flex flex-col gap-y-2 h-[100vh] p-6 mytransition' :
                     'overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 text-white hidden md:flex flex-col gap-y-2 h-[100vh] p-6 mytransition translate-x-56'}>
                     <img src={logo} alt='logo' className='w-2/3 mx-auto' />
-                    <Link className="flex items-center gap-x-2">
+                    <Link to='/dashboard/' className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'home']} />
                         <span>صفحه اصلی</span>
                     </Link>
@@ -268,7 +268,7 @@ const Sidebar = () => {
                     'hidden' :
                     'bg-purple-600 dark:bg-dark-600 fixed z-[15000] overflow-auto sidebar text-white hidden md:flex flex-col justify-between items-center gap-y-4 h-[100vh] md:py-6 md:px-2 lg:p-6 mytransition'}>
                     <div className='flex flex-col gap-y-4'>
-                        <Link className='mt-6 text-sm'>
+                        <Link to='/dashboard/' className='mt-6 text-sm'>
                             <FontAwesomeIcon icon={['fas', 'home']} />
                         </Link>
                         {/* shopping links start */}
@@ -469,7 +469,7 @@ const Sidebar = () => {
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition' :
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition translate-x-[450px]'}>
                     <img src={logo} alt='logo' className='w-1/2 mx-auto' />
-                    <Link className="flex items-center gap-x-2">
+                    <Link to='/dashboard/' className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'home']} />
                         <span>صفحه اصلی</span>
                     </Link>
