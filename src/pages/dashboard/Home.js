@@ -31,15 +31,15 @@ const Home = () => {
                         <p className='text-sm n md:text-base text-cyan-600 dark:text-cyan-300'>کل فروش امروز</p>
                         <p className='text-2xl md:text-4xl dastevis'>3500000 تومان</p>
                     </div>
-                    <div className='self-center bg-purple-400 dark:bg-cyan-800 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden'>50%</div>
+                    <div className='self-center bg-purple-400 dark:bg-cyan-800 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden aviny'>50%</div>
                 </div>
                 <div className="col-span-8 md:col-span-4 bg-cyan-300 dark:bg-cyan-900 rounded-md flex justify-between p-4">
                     <div className='flex flex-col items-between'>
-                        <p className='text-lg md:text-2xl aviny'>بازدید</p>
+                        <p className='text-lg md:text-2xl pageY'>بازدید</p>
                         <p className='text-sm n md:text-base text-cyan-600 dark:text-cyan-300'>کل بازدید امروز</p>
                         <p className='text-2xl md:text-4xl dastevis'>452</p>
                     </div>
-                    <div className='self-center bg-purple-400 dark:bg-dark-700 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden'>50%</div>
+                    <div className='self-center bg-purple-400 dark:bg-dark-700 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden aviny'>50%</div>
                 </div>
                 <div className="col-span-8 md:col-span-4 bg-purple-300 dark:bg-dark-600 rounded-md flex justify-between p-4">
                     <div className='flex flex-col items-between'>
@@ -47,7 +47,7 @@ const Home = () => {
                         <p className='text-sm n md:text-base text-cyan-600 dark:text-cyan-300'>کل سفارشات امروز</p>
                         <p className='text-2xl md:text-4xl dastevis'>14</p>
                     </div>
-                    <div className='self-center bg-purple-400 dark:bg-cyan-800 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden'>50%</div>
+                    <div className='self-center bg-purple-400 dark:bg-cyan-800 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden aviny'>50%</div>
                 </div>
                 <div className="col-span-8 md:col-span-4 bg-cyan-300 dark:bg-cyan-900 rounded-md flex justify-between p-4">
                     <div className='flex flex-col items-between'>
@@ -55,7 +55,7 @@ const Home = () => {
                         <p className='text-sm n md:text-base text-cyan-600 dark:text-cyan-300'>کل نظرات امروز</p>
                         <p className='text-2xl md:text-4xl dastevis'>850</p>
                     </div>
-                    <div className='self-center bg-purple-400 dark:bg-dark-700 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden'>50%</div>
+                    <div className='self-center bg-purple-400 dark:bg-dark-700 h-10 w-10 border-2 border-zinc-500 flex items-center justify-center rounded-full overflow-hidden aviny'>50%</div>
                 </div>
             </section>
             {/* middle cards end */}

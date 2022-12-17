@@ -23,8 +23,6 @@ const Sidebar = () => {
         setIsOpenMobileSidebar(!isOpenMobileSidebar);
         setActiveMenu(false);
     }
-
-
     //    const wheelMinimalSidebar = e => {
     //         let trueHeightSidebar= e.currentTarget.children.item(0).clientHeight + e.currentTarget.children.item(1).clientHeight + e.currentTarget.children.item(2).clientHeight;
     //         // console.log(trueHeightSidebar)
@@ -34,16 +32,13 @@ const Sidebar = () => {
     //             e.currentTarget.style.transform = `translateY(-${defHeigt}px)`;
     //         }
     //    }
-
     const showSubmenu = e => {
-        let top = e.clientY;
+        let top = e.pageY;
         let id = e.currentTarget.id;
         let menuBox = document.getElementById(`${id}2`);
         // let windowHeight = window.innerHeight;
-        top = e.clientY - 25;
+        top = e.pageY - 25;
         menuBox.style.top = `${top}px`;
-        console.log(e)
-        // console.log(window.innerHeight)
         return setShowSubMenu(e.currentTarget.id);
     }
 
@@ -85,11 +80,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>دسته بندی</Link>
-                            <Link className='hover:text-amber-400'>فرم کالا</Link>
-                            <Link className='hover:text-amber-400'>برندها</Link>
-                            <Link className='hover:text-amber-400'>کالاها</Link>
-                            <Link className='hover:text-amber-400'>انبار</Link>
+                            <Link to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            <Link className='hover:text-amber-400'>فرم خدمات</Link>
+                            {/* <Link className='hover:text-amber-400'>برندها</Link> */}
+                            <Link className='hover:text-amber-400'>خدمات</Link>
+                            {/* <Link className='hover:text-amber-400'>کالاها</Link> */}
+                            {/* <Link className='hover:text-amber-400'>انبار</Link> */}
                             <Link className='hover:text-amber-400'>نظرات</Link>
                         </section>
                     </section>
@@ -328,11 +324,12 @@ const Sidebar = () => {
                 {/* vitreen modal menu start */}
                 <section id='vitreen2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('vitreen')} className={showSubMenu === 'vitreen' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>ویترین</div>
-                    <Link className='text-white hover:text-amber-400'>دسته بندی</Link>
-                    <Link className='text-white hover:text-amber-400'>فرم کالا</Link>
-                    <Link className='text-white hover:text-amber-400'>برندها</Link>
-                    <Link className='text-white hover:text-amber-400'>کالاها</Link>
-                    <Link className='text-white hover:text-amber-400'>انبار</Link>
+                    <Link to='/dashboard/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
+                    <Link className='text-white hover:text-amber-400'>فرم خدمات</Link>
+                    {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
+                    {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
+                    <Link className='text-white hover:text-amber-400'>خدمات</Link>
+                    {/* <Link className='text-white hover:text-amber-400'>انبار</Link> */}
                     <Link className='text-white hover:text-amber-400'>نظرات</Link>
                 </section>
                 {/* vitreen modal menu end */}
@@ -469,7 +466,7 @@ const Sidebar = () => {
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition' :
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition translate-x-[450px]'}>
                     <img src={logo} alt='logo' className='w-1/2 mx-auto' />
-                    <Link to='/dashboard/' className="flex items-center gap-x-2">
+                    <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/' className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'home']} />
                         <span>صفحه اصلی</span>
                     </Link>
@@ -484,12 +481,13 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>دسته بندی</Link>
-                            <Link className='hover:text-amber-400'>فرم کالا</Link>
-                            <Link className='hover:text-amber-400'>برندها</Link>
-                            <Link className='hover:text-amber-400'>کالاها</Link>
-                            <Link className='hover:text-amber-400'>انبار</Link>
-                            <Link className='hover:text-amber-400'>نظرات</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
+                            {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
+                            {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کالاها</Link> */}
+                            {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>انبار</Link> */}
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>نظرات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -501,12 +499,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 2 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 2 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'> جدید</Link>
-                            <Link className='hover:text-amber-400'>در حال ارسال</Link>
-                            <Link className='hover:text-amber-400'>پرداخت نشده</Link>
-                            <Link className='hover:text-amber-400'>باطل شده</Link>
-                            <Link className='hover:text-amber-400'>مرجوعی</Link>
-                            <Link className='hover:text-amber-400'>تمام سفارشات</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'> جدید</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>در حال ارسال</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت نشده</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>باطل شده</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>مرجوعی</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام سفارشات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -518,10 +516,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 3 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 3 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>تمام پرداخت ها</Link>
-                            <Link className='hover:text-amber-400'>پرداخت های آنلاین</Link>
-                            <Link className='hover:text-amber-400'>پرداخت های آفلاین</Link>
-                            <Link className='hover:text-amber-400'>پرداخت در محل</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام پرداخت ها</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آنلاین</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آفلاین</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت در محل</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -533,12 +531,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 4 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 4 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>کپن تخفیف</Link>
-                            <Link className='hover:text-amber-400'>تخفیف عمومی</Link>
-                            <Link className='hover:text-amber-400'>فروش شگفت انگیز</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کپن تخفیف</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تخفیف عمومی</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فروش شگفت انگیز</Link>
                         </section>
                     </section>
-                    <Link className="flex items-center gap-x-2">
+                    <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'shipping-fast']} flip='horizontal' />
                         <span>روش های ارسال</span>
                     </Link>
@@ -550,31 +548,31 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 5 ? '-rotate-90 text-amber-300 mytransition' : 'text-amber-300'} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 5 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'border-all']} />
                                 <span>دسته بندی</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'sticky-note']} />
                                 <span>پست ها</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'comment']} />
                                 <span>نظرات</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'grip-vertical']} />
                                 <span>منو</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'question']} />
                                 <span>سوالات متداول</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'pager']} />
                                 <span>پیج ساز</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'digital-tachograph']} />
                                 <span>بنر ها</span>
                             </Link>
@@ -588,15 +586,15 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 6 ? '-rotate-90 text-amber-300 mytransition' : 'text-amber-300'} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 6 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'user-tie']} />
                                 <span>کاربران ادمین</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'user']} />
                                 <span>مشتریان</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'user-secret']} />
                                 <span>سطوح دسترسی</span>
                             </Link>
@@ -610,31 +608,31 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 7 ? '-rotate-90 text-amber-300 mytransition' : 'text-amber-300'} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 7 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'border-all']} />
                                 <span> دسته بندی تیکت ها </span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['far', 'list-alt']} />
                                 <span> اولویت تیکت ها </span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'user-check']} />
                                 <span> ادمین تیکت ها </span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fab', 'medapps']} />
                                 <span>تیکت های جدید</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fab', 'readme']} />
                                 <span>تیکت های باز</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fab', 'stack-exchange']} />
                                 <span>تیکت های بسته</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'ticket-alt']} />
                                 <span>همه ی تیکت ها</span>
                             </Link>
@@ -643,18 +641,18 @@ const Sidebar = () => {
                     {/* tickets links end */}
                     {/* notifications links start */}
                     <section className='text-amber-300'>بخش اطلاع رسانی</section>
-                    <Link className="flex items-center gap-x-2">
+                    <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'envelope']} />
                         <span>اعلامیه ایمیلی</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2">
+                    <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['far', 'comments']} />
                         <span>اعلامیه پیامکی</span>
                     </Link>
                     {/* notifications links end */}
                     {/* settings links end */}
                     <section className='text-amber-300'>بخش تنظیمات</section>
-                    <Link className="flex items-center gap-x-2">
+                    <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'cog']} />
                         <span>تنظیمات</span>
                     </Link>

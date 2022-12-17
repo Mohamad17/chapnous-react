@@ -10,5 +10,27 @@
     .sidebarBtnClose{
         @apply absolute right-full flex justify-center items-center opacity-50 z-[2500] bg-purple-800 py-6 px-1 hover:bg-purple-900 mytransition rounded-l-md;
     }
+    .squareIcon{
+        @apply flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-sm lg:text-base border border-purple-500 bg-zinc-400 rounded-md text-white hover:bg-purple-400 hover:text-zinc-500 mytransition;
+    }
+    .tooltip{
+        @apply absolute top-2/3 right-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md;
+    }
+    .form{
+        @apply w-full grid grid-cols-8 gap-6 bg-purple-400/30 dark:bg-dark-800 dark:text-zinc-300 rounded-lg p-4;
+    }
+    .form-group{
+        @apply col-span-8 md:col-span-4 flex flex-col gap-y-2;
+    }
+
+    .input-form{
+        @apply px-3 py-1 pr-3 outline-none focus:border focus:border-cyan-600 dark:bg-purple-800 dark:text-zinc-300 ring-0 rounded-lg w-full mytransition;
+    }
+    .select-input{
+        @apply outline-none focus:border focus:border-cyan-600 bg-white dark:bg-purple-800 dark:text-zinc-300 ring-0 rounded-lg w-full mytransition;
+    }
+    .submitbtn{
+        @apply col-span-8 w-1/2 md:w-1/5 bg-cyan-500 hover:bg-purple-400 dark:hover:bg-pink-700 dark:bg-cyan-800 rounded-full py-1 px-3 mytransition; 
+    }
 }
 @tailwind utilities;
