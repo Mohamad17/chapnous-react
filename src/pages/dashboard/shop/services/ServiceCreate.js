@@ -9,7 +9,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const CategoryEdit = () => {
+const ServiceCreate = () => {
     const [tags, setTags] = useState([]);
 
     const handleDelete = i => {
@@ -41,25 +41,25 @@ const CategoryEdit = () => {
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>دسته بندی ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
-                <p>ویرایش دسته بندی</p>
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>خدمات</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
+                <p>ایجاد خدمات</p>
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش دسته بندی</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ایجاد خدمات</p>
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
                 {/* name */}
                 <div className="form-group">
-                    <label htmlFor='name'>نام دسته بندی</label>
+                    <label htmlFor='name'>نام خدمات</label>
                     <input id='name' name='name' type='text' className='input-form' />
                 </div>
-                {/* parent_id */}
+                {/* category */}
                 <div className="form-group">
-                    <label htmlFor='parent_id'>دسته والد</label>
+                    <label htmlFor='parent_id'>دسته بندی</label>
                     <select id='parent_id' name='parent_id' className='select-input'>
-                        <option>انتخاب دسته والد</option>
+                        <option>انتخاب دسته بندی</option>
                         <option value='1'>چاپ دیجیتال</option>
                         <option value='2'>چاپ دیجیتال</option>
                         <option value='3'>چاپ دیجیتال</option>
@@ -73,10 +73,10 @@ const CategoryEdit = () => {
                         <option value='2'>فعال</option>
                     </select>
                 </div>
-                {/* image */}
+                {/* icon */}
                 <div className="form-group">
-                    <label htmlFor='image'>تصویر</label>
-                    <input id='image' name='image' type='file' className='input-form' />
+                    <label htmlFor='icon'>آیکون</label>
+                    <input id='icon' name='icon' type='file' className='input-form' />
                 </div>
                 {/* tags */}
                 <div className="col-span-8 flex flex-col gap-y-2">
@@ -93,11 +93,11 @@ const CategoryEdit = () => {
                         autocomplete
                     />
                 </div>
-                <button type='submit' className='submitbtn'>ویرایش</button>
+                <button type='submit' className='submitbtn'>افزودن</button>
             </form>
             {/* form end */}
         </div>
     );
 };
 
-export default CategoryEdit;
+export default ServiceCreate;

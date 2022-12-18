@@ -5,6 +5,7 @@ import Home from '../../../pages/dashboard/Home';
 import CategoryCreate from '../../../pages/dashboard/shop/category/CategoryCreate';
 import CategoryEdit from '../../../pages/dashboard/shop/category/CategoryEdit';
 import CategoryIndex from '../../../pages/dashboard/shop/category/CategoryIndex';
+import ServiceIndex from '../../../pages/dashboard/shop/services/ServiceIndex';
 import Header from './Header';
 
 const Main = () => {
@@ -20,6 +21,11 @@ const Main = () => {
                 <Route path='/dashboard/category/create' element={<CategoryCreate />} />
                 <Route path='/dashboard/category/edit' element={<CategoryEdit />} />
                 {/* category routes end */}
+                {/* services routes start */}
+                <Route path='/dashboard/service/' element={<ServiceIndex />} />
+                <Route path='/dashboard/service/create' element={<CategoryCreate />} />
+                <Route path='/dashboard/service/edit' element={<CategoryEdit />} />
+                {/* services routes end */}
 
             </Routes>
         </section>

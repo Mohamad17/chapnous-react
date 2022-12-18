@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import img3 from '../../../../assets/images/3.jpg'
+import img3 from '../../../../assets/images/digital-01.jpg'
 
-const CategoryIndex = () => {
+const ServiceIndex = () => {
     const [search, setSearch] = useState('');
 
     return (
@@ -12,15 +12,15 @@ const CategoryIndex = () => {
             <section className='flex items-center gap-x-4 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[12px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <p>دسته بندی ها</p>
+                <p>خدمات</p>
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>دسته بندی ها</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>خدمات</p>
             <div className="flex flex-wrap justify-evenly md:justify-between items-center gap-y-4 w-full">
                 <Link to='/dashboard/category/create' className='squareIcon relative group'>
                     <FontAwesomeIcon icon={['fas', 'plus']} />
-                    <span className='tooltip w-28 hidden group-hover:flex'>دسته بندی جدید</span>
+                    <span className='tooltip w-28 hidden group-hover:flex'>خدمات جدید</span>
                 </Link>
                 <p className='dark:text-zinc-300 text-sm'>نمایش 1 تا 10 آیتم از 150 آیتم موجود</p>
                 <div className='justify-self-center md:ustify-self-between relative group flex justify-center items-center'>
@@ -33,12 +33,12 @@ const CategoryIndex = () => {
             <section className="container mb-10 dark:text-zinc-200">
                 {/* titles */}
                 <div className="hidden grid-cols-12 gap-4 p-4 text-sm md:grid title_color">
-                    <div className="col-span-1"> تصویر </div>
-                    <div className="col-span-3 text-center"> نام دسته بندی </div>
-                    <div className="col-span-3 text-center"> دسته والد </div>
-                    <div className="col-span-3 text-center"> اسلاگ </div>
+                    <div className="col-span-1"> آیکون </div>
+                    <div className="col-span-4 text-center"> نام خدمات </div>
+                    <div className="col-span-3 text-center"> دسته بندی </div>
                     <div className="col-span-1 text-center"> وضعیت </div>
-                    <div className="col-span-1 text-left"> اقدامات </div>
+                    <div className="col-span-1 text-center text-[10px]"> تعداد انجام شده </div>
+                    <div className="col-span-2 text-center"> اقدامات </div>
                 </div>
                 {/* table */}
                 <div className="flex flex-col gap-2">
@@ -49,23 +49,23 @@ const CategoryIndex = () => {
                                 <img src={img3} alt="avatar" className="w-12 h-12 rounded-full" />
                             </div>
                         </div>
-                        <div className="flex items-center justify-between md:justify-center md:col-span-3">
-                            <h3 className="text-sm md:hidden"> نام دسته بندی </h3>
+                        <div className="flex items-center justify-between md:justify-center md:col-span-4">
+                            <h3 className="text-sm md:hidden"> نام خدمت </h3>
                             <h3 className="text-sm"> چاپ دیجیتال </h3>
                         </div>
                         <div className="flex items-center justify-between md:justify-center md:col-span-3">
-                            <h3 className="text-sm md:hidden"> دسته والد </h3>
-                            <h3 className="text-sm"> - </h3>
-                        </div>
-                        <div className="flex items-center justify-between md:justify-center md:col-span-3">
-                            <h3 className="text-sm md:hidden"> اسلاگ </h3>
-                            <h3 className="text-sm"> دیجیتال-چاپ </h3>
+                            <h3 className="text-sm md:hidden"> دسته بندی </h3>
+                            <h3 className="text-sm"> فتوکپی </h3>
                         </div>
                         <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
                             <h3 className="text-sm md:hidden"> وضعیت </h3>
                             <h3 className="px-4 py-1 text-sm md:text-base text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 rounded-full"> فعال </h3>
                         </div>
-                        <div className="flex px-4 justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-1">
+                        <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
+                            <h3 className="text-sm md:hidden"> تعداد انجام شده </h3>
+                            <h3 className="px-4 py-1 text-sm md:text-base"> 56 </h3>
+                        </div>
+                        <div className="flex px-4 justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
                             <div className="text-2xl md:text-sm text-purple-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-purple-400 cursor-pointer relative group">
                                 <Link to='/dashboard/category/edit'>
                                     <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'edit']} />
@@ -86,4 +86,4 @@ const CategoryIndex = () => {
     );
 };
 
-export default CategoryIndex;
+export default ServiceIndex;

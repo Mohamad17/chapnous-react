@@ -83,7 +83,7 @@ const Sidebar = () => {
                             <Link to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link className='hover:text-amber-400'>برندها</Link> */}
-                            <Link className='hover:text-amber-400'>خدمات</Link>
+                            <Link to='/dashboard/service/' className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link className='hover:text-amber-400'>کالاها</Link> */}
                             {/* <Link className='hover:text-amber-400'>انبار</Link> */}
                             <Link className='hover:text-amber-400'>نظرات</Link>
@@ -328,7 +328,7 @@ const Sidebar = () => {
                     <Link className='text-white hover:text-amber-400'>فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
-                    <Link className='text-white hover:text-amber-400'>خدمات</Link>
+                    <Link to='/dashboard/service/' className='text-white hover:text-amber-400'>خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>انبار</Link> */}
                     <Link className='text-white hover:text-amber-400'>نظرات</Link>
                 </section>
@@ -484,7 +484,7 @@ const Sidebar = () => {
                             <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
+                            <Link to='/dashboard/service/' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کالاها</Link> */}
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>انبار</Link> */}
                             <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>نظرات</Link>

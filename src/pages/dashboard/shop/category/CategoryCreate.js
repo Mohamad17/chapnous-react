@@ -38,9 +38,10 @@ const CategoryCreate = () => {
     return (
         <div className='flex flex-col items-center gap-y-4 px-4'>
             {/* breadcrumb start */}
-            <section className='flex items-center gap-x-4 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300'>
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>دسته بندی ها</Link><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
+            <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
+                <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>دسته بندی ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>ایجاد دسته بندی</p>
             </section>
             {/* breadcrumb end */}
@@ -49,10 +50,12 @@ const CategoryCreate = () => {
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
+                {/* name */}
                 <div className="form-group">
                     <label htmlFor='name'>نام دسته بندی</label>
                     <input id='name' name='name' type='text' className='input-form' />
                 </div>
+                {/* parent category */}
                 <div className="form-group">
                     <label htmlFor='parent_id'>دسته والد</label>
                     <select id='parent_id' name='parent_id' className='select-input'>
@@ -62,6 +65,7 @@ const CategoryCreate = () => {
                         <option value='3'>چاپ دیجیتال</option>
                     </select>
                 </div>
+                {/* status */}
                 <div className="form-group">
                     <label htmlFor='status'>وضعیت</label>
                     <select id='status' name='status' className='select-input'>
@@ -69,23 +73,25 @@ const CategoryCreate = () => {
                         <option value='2'>فعال</option>
                     </select>
                 </div>
+                {/* image */}
                 <div className="form-group">
                     <label htmlFor='image'>تصویر</label>
                     <input id='image' name='image' type='file' className='input-form' />
                 </div>
+                {/* tags */}
                 <div className="col-span-8 flex flex-col gap-y-2">
-                <label>تگ ها</label>
-                <ReactTags
-                    tags={tags}
-                    delimiters={delimiters}
-                    handleDelete={handleDelete}
-                    handleAddition={handleAddition}
-                    handleDrag={handleDrag}
-                    placeholder= "افزودن تگ ها"
-                    handleTagClick={handleTagClick}
-                    inputFieldPosition="bottom"
-                    autocomplete
-                />
+                    <label>تگ ها</label>
+                    <ReactTags
+                        tags={tags}
+                        delimiters={delimiters}
+                        handleDelete={handleDelete}
+                        handleAddition={handleAddition}
+                        handleDrag={handleDrag}
+                        placeholder="افزودن تگ ها"
+                        handleTagClick={handleTagClick}
+                        inputFieldPosition="bottom"
+                        autocomplete
+                    />
                 </div>
                 <button type='submit' className='submitbtn'>افزودن</button>
             </form>
