@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from 'ckeditor5-build-classic';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -41,7 +43,7 @@ const ServiceCreate = () => {
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>خدمات</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/service'>خدمات</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>ایجاد خدمات</p>
             </section>
             {/* breadcrumb end */}
@@ -91,6 +93,30 @@ const ServiceCreate = () => {
                         handleTagClick={handleTagClick}
                         inputFieldPosition="bottom"
                         autocomplete
+                    />
+                </div>
+                {/* introduction */}
+                <div className="textEditor col-span-8 flex flex-col gap-y-2">
+                    <label>معرفی محصول</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data=""
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({ event, editor, data });
+                        }}
+                    />
+                </div>
+                {/* summery */}
+                <div className="textEditor col-span-8 flex flex-col gap-y-2">
+                    <label>خلاصه راهنما</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data=""
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({ event, editor, data });
+                        }}
                     />
                 </div>
                 <button type='submit' className='submitbtn'>افزودن</button>

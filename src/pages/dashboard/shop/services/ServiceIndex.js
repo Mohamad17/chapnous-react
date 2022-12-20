@@ -18,7 +18,7 @@ const ServiceIndex = () => {
             {/* head page start */}
             <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>خدمات</p>
             <div className="flex flex-wrap justify-evenly md:justify-between items-center gap-y-4 w-full">
-                <Link to='/dashboard/category/create' className='squareIcon relative group'>
+                <Link to='/dashboard/service/create' className='squareIcon relative group'>
                     <FontAwesomeIcon icon={['fas', 'plus']} />
                     <span className='tooltip w-28 hidden group-hover:flex'>خدمات جدید</span>
                 </Link>
@@ -67,7 +67,7 @@ const ServiceIndex = () => {
                         </div>
                         <div className="flex px-4 justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
                             <div className="text-2xl md:text-sm text-purple-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-purple-400 cursor-pointer relative group">
-                                <Link to='/dashboard/category/edit'>
+                                <Link to='/dashboard/service/edit'>
                                     <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'edit']} />
                                 </Link>
                                 <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>ویرایش</span>
@@ -75,6 +75,22 @@ const ServiceIndex = () => {
                             <div className="text-2xl md:text-sm text-rose-700 dark:text-rose-400 hover:text-orange-700 dark:hover:text-purple-400 cursor-pointer relative group">
                                 <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'trash']} />
                                 <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>حذف</span>
+                            </div>
+                            <div className='relative group'>
+                                <span className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md'>
+                                    <div>بیشتر</div>
+                                    <FontAwesomeIcon icon={['fas', 'angle-left']} className='group-hover:-rotate-90 mytransition' />
+                                </span>
+                                <div className="absolute top-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
+                                    <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                                        <FontAwesomeIcon icon={['fas', 'chess-board']} />
+                                        <div>ویژگی های خدمات</div>
+                                    </span>
+                                    <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                                        <FontAwesomeIcon icon={['fas', 'chess-board']} />
+                                        <div>ویژگی های خدمات</div>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
