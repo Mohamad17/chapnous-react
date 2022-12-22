@@ -119,7 +119,7 @@ const ServiceEdit = () => {
                         }}
                     />
                 </div>
-                <button type='submit' className='submitbtn'>افزودن</button>
+                <button type='submit' className='submitbtn'>ویرایش</button>
             </form>
             {/* form end */}
         </div>

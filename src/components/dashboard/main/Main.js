@@ -5,9 +5,29 @@ import Home from '../../../pages/dashboard/Home';
 import CategoryCreate from '../../../pages/dashboard/shop/category/CategoryCreate';
 import CategoryEdit from '../../../pages/dashboard/shop/category/CategoryEdit';
 import CategoryIndex from '../../../pages/dashboard/shop/category/CategoryIndex';
+import DeliveryCreate from '../../../pages/dashboard/shop/delivery/DeliveryCreate';
+import DeliveryEdit from '../../../pages/dashboard/shop/delivery/DeliveryEdit';
+import DeliveryIndex from '../../../pages/dashboard/shop/delivery/DeliveryIndex';
+import AmazingCreate from '../../../pages/dashboard/shop/discount/amazing/AmazingCreate';
+import AmazingEdit from '../../../pages/dashboard/shop/discount/amazing/AmazingEdit';
+import AmazingIndex from '../../../pages/dashboard/shop/discount/amazing/AmazingIndex';
+import CommonCreate from '../../../pages/dashboard/shop/discount/common/CommonCreate';
+import CommonEdit from '../../../pages/dashboard/shop/discount/common/CommonEdit';
+import CommonIndex from '../../../pages/dashboard/shop/discount/common/CommonIndex';
+import CopanCreate from '../../../pages/dashboard/shop/discount/copan/CopanCreate';
+import CopanEdit from '../../../pages/dashboard/shop/discount/copan/CopanEdit';
+import CopanIndex from '../../../pages/dashboard/shop/discount/copan/CopanIndex';
+import OrderIndex from '../../../pages/dashboard/shop/order/OrderIndex';
+import PaymentIndex from '../../../pages/dashboard/shop/payment/PaymentIndex';
 import ServiceCreate from '../../../pages/dashboard/shop/services/ServiceCreate';
 import ServiceEdit from '../../../pages/dashboard/shop/services/ServiceEdit';
 import ServiceIndex from '../../../pages/dashboard/shop/services/ServiceIndex';
+import ServiceAttributeCreate from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeCreate';
+import ServiceAttributeEdit from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeEdit';
+import ServiceAttributeIndex from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeIndex';
+import ServiceAttributeValueCreate from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueCreate';
+import ServiceAttributeValueEdit from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueEdit';
+import ServiceAttributeValueIndex from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueIndex';
 import Header from './Header';
 
 const Main = () => {
@@ -28,7 +48,42 @@ const Main = () => {
                 <Route path='/dashboard/service/create' element={<ServiceCreate />} />
                 <Route path='/dashboard/service/edit' element={<ServiceEdit />} />
                 {/* services routes end */}
-
+                {/* services attributes routes start */}
+                <Route path='/dashboard/service/attributes' element={<ServiceAttributeIndex />} />
+                <Route path='/dashboard/service/attributes/create' element={<ServiceAttributeCreate />} />
+                <Route path='/dashboard/service/attributes/edit' element={<ServiceAttributeEdit />} />
+                {/* services attributes routes end */}
+                {/* services attributes values routes start */}
+                <Route path='/dashboard/service/attributes/value' element={<ServiceAttributeValueIndex />} />
+                <Route path='/dashboard/service/attributes/value/create' element={<ServiceAttributeValueCreate />} />
+                <Route path='/dashboard/service/attributes/value/edit' element={<ServiceAttributeValueEdit />} />
+                {/* services attributes values routes end */}
+                {/* oeders routes start */}
+                <Route path='/dashboard/orders/:status' element={<OrderIndex />} />
+                {/* oeders routes end */}
+                {/* payments routes start */}
+                <Route path='/dashboard/payments/:type' element={<PaymentIndex />} />
+                {/* payments routes end */}
+                {/* amazing sales routes start */}
+                <Route path='/dashboard/discounts/amazing-sales' element={<AmazingIndex />} />
+                <Route path='/dashboard/discounts/amazing-sales/create' element={<AmazingCreate />} />
+                <Route path='/dashboard/discounts/amazing-sales/edit' element={<AmazingEdit />} />
+                {/* amazing sales routes end */}
+                {/* common discount routes start */}
+                <Route path='/dashboard/discounts/common' element={<CommonIndex />} />
+                <Route path='/dashboard/discounts/common/create' element={<CommonCreate />} />
+                <Route path='/dashboard/discounts/common/edit' element={<CommonEdit />} />
+                {/* common discount routes end */}
+                {/* copan discount routes start */}
+                <Route path='/dashboard/discounts/copan' element={<CopanIndex />} />
+                <Route path='/dashboard/discounts/copan/create' element={<CopanCreate />} />
+                <Route path='/dashboard/discounts/copan/edit' element={<CopanEdit />} />
+                {/* copan discount routes end */}
+                {/* delivery routes start */}
+                <Route path='/dashboard/delivery' element={<DeliveryIndex />} />
+                <Route path='/dashboard/delivery/create' element={<DeliveryCreate />} />
+                <Route path='/dashboard/delivery/edit' element={<DeliveryEdit />} />
+                {/* delivery routes end */}
             </Routes>
         </section>
     );

@@ -1,4 +1,4 @@
-import React, { useContext , useRef, useState} from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo-white.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ const Sidebar = () => {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const { isOpenSidebar, setIsOpenSidebar } = useContext(IsOpenSideBar);
     const [isOpenMobileSidebar, setIsOpenMobileSidebar] = useState(false);
-    const mobileSidebar= useRef();
+    const mobileSidebar = useRef();
     const submenuHandle = (e) => {
         // console.log(e.currentTarget)
         // let ele= document.getElementById(e.target.id);
@@ -49,7 +49,7 @@ const Sidebar = () => {
     }
 
     const closeMobileSidebar = e => {
-        if(mobileSidebar.current && isOpenMobileSidebar && !mobileSidebar.current.contains(e.target)){
+        if (mobileSidebar.current && isOpenMobileSidebar && !mobileSidebar.current.contains(e.target)) {
             setIsOpenMobileSidebar(false);
         }
     }
@@ -81,12 +81,11 @@ const Sidebar = () => {
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
-                            <Link className='hover:text-amber-400'>فرم خدمات</Link>
+                            <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link className='hover:text-amber-400'>برندها</Link> */}
                             <Link to='/dashboard/service/' className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link className='hover:text-amber-400'>کالاها</Link> */}
                             {/* <Link className='hover:text-amber-400'>انبار</Link> */}
-                            <Link className='hover:text-amber-400'>نظرات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -98,12 +97,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 2 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 2 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'> جدید</Link>
-                            <Link className='hover:text-amber-400'>در حال ارسال</Link>
-                            <Link className='hover:text-amber-400'>پرداخت نشده</Link>
-                            <Link className='hover:text-amber-400'>باطل شده</Link>
-                            <Link className='hover:text-amber-400'>مرجوعی</Link>
-                            <Link className='hover:text-amber-400'>تمام سفارشات</Link>
+                            <Link to='/dashboard/orders/سفارشات جدید' className='hover:text-amber-400'> جدید</Link>
+                            <Link to='/dashboard/orders/سفارشات در حال ارسال' className='hover:text-amber-400'>در حال ارسال</Link>
+                            <Link to='/dashboard/orders/سفارشات پرداخت نشده' className='hover:text-amber-400'>پرداخت نشده</Link>
+                            <Link to='/dashboard/orders/سفارشات باطل شده' className='hover:text-amber-400'>باطل شده</Link>
+                            <Link to='/dashboard/orders/سفارشات مرجوعی' className='hover:text-amber-400'>مرجوعی</Link>
+                            <Link to='/dashboard/orders/همه سفارشات' className='hover:text-amber-400'>تمام سفارشات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -115,10 +114,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 3 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 3 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>تمام پرداخت ها</Link>
-                            <Link className='hover:text-amber-400'>پرداخت های آنلاین</Link>
-                            <Link className='hover:text-amber-400'>پرداخت های آفلاین</Link>
-                            <Link className='hover:text-amber-400'>پرداخت در محل</Link>
+                            <Link to='/dashboard/payments/همه پرداخت ها' className='hover:text-amber-400'>تمام پرداخت ها</Link>
+                            <Link to='/dashboard/payments/پرداخت های آنلاین' className='hover:text-amber-400'>پرداخت های آنلاین</Link>
+                            <Link to='/dashboard/payments/پرداخت های آفلاین' className='hover:text-amber-400'>پرداخت های آفلاین</Link>
+                            <Link to='/dashboard/payments/پرداخت در محل' className='hover:text-amber-400'>پرداخت در محل</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -130,12 +129,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 4 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 4 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className='hover:text-amber-400'>کپن تخفیف</Link>
-                            <Link className='hover:text-amber-400'>تخفیف عمومی</Link>
-                            <Link className='hover:text-amber-400'>فروش شگفت انگیز</Link>
+                            <Link to='/dashboard/discounts/copan' className='hover:text-amber-400'>کپن تخفیف</Link>
+                            <Link to='/dashboard/discounts/common' className='hover:text-amber-400'>تخفیف عمومی</Link>
+                            <Link to='/dashboard/discounts/amazing-sales' className='hover:text-amber-400'>فروش شگفت انگیز</Link>
                         </section>
                     </section>
-                    <Link className="flex items-center gap-x-2">
+                    <Link to='/dashboard/delivery' className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'shipping-fast']} flip='horizontal' />
                         <span>روش های ارسال</span>
                     </Link>
@@ -280,7 +279,7 @@ const Sidebar = () => {
                         <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='discounts'>
                             <FontAwesomeIcon icon={['fas', 'percent']} />
                         </section>
-                        <Link onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='delivery'>
+                        <Link to='/dashboard/delivery' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='delivery'>
                             <FontAwesomeIcon icon={['fas', 'shipping-fast']} flip='horizontal' />
                         </Link>
                         {/* shopping links end */}
@@ -325,40 +324,39 @@ const Sidebar = () => {
                 <section id='vitreen2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('vitreen')} className={showSubMenu === 'vitreen' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>ویترین</div>
                     <Link to='/dashboard/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
-                    <Link className='text-white hover:text-amber-400'>فرم خدمات</Link>
+                    <Link to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
                     <Link to='/dashboard/service/' className='text-white hover:text-amber-400'>خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>انبار</Link> */}
-                    <Link className='text-white hover:text-amber-400'>نظرات</Link>
                 </section>
                 {/* vitreen modal menu end */}
                 {/* orders modal menu start */}
                 <section id='orders2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('orders')} className={showSubMenu === 'orders' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>سفارشات</div>
-                    <Link className='text-white hover:text-amber-400'> جدید</Link>
-                    <Link className='text-white hover:text-amber-400'>در حال ارسال</Link>
-                    <Link className='text-white hover:text-amber-400'>پرداخت نشده</Link>
-                    <Link className='text-white hover:text-amber-400'>باطل شده</Link>
-                    <Link className='text-white hover:text-amber-400'>مرجوعی</Link>
-                    <Link className='text-white hover:text-amber-400'>تمام سفارشات</Link>
+                    <Link to='/dashboard/orders/سفارشات جدید' className='hover:text-amber-400'> جدید</Link>
+                    <Link to='/dashboard/orders/سفارشات در حال ارسال' className='text-white hover:text-amber-400'>در حال ارسال</Link>
+                    <Link to='/dashboard/orders/سفارشات پرداخت نشده' className='text-white hover:text-amber-400'>پرداخت نشده</Link>
+                    <Link to='/dashboard/orders/سفارشات باطل شده' className='text-white hover:text-amber-400'>باطل شده</Link>
+                    <Link to='/dashboard/orders/سفارشات مرجوعی' className='text-white hover:text-amber-400'>مرجوعی</Link>
+                    <Link to='/dashboard/orders/همه سفارشات' className='text-white hover:text-amber-400'>تمام سفارشات</Link>
                 </section>
                 {/* orders modal menu end */}
                 {/* payments modal menu start */}
                 <section id='payments2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('payments')} className={showSubMenu === 'payments' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>پرداخت ها</div>
-                    <Link className='text-white hover:text-amber-400'>تمام پرداخت ها</Link>
-                    <Link className='text-white hover:text-amber-400'>پرداخت های آنلاین</Link>
-                    <Link className='text-white hover:text-amber-400'>پرداخت های آفلاین</Link>
-                    <Link className='text-white hover:text-amber-400'>پرداخت در محل</Link>
+                    <Link to='/dashboard/payments/همه پرداخت ها' className='text-white hover:text-amber-400'>تمام پرداخت ها</Link>
+                    <Link to='/dashboard/payments/پرداخت های آنلاین' className='text-white hover:text-amber-400'>پرداخت های آنلاین</Link>
+                    <Link to='/dashboard/payments/پرداخت های آفلاین' className='text-white hover:text-amber-400'>پرداخت های آفلاین</Link>
+                    <Link to='/dashboard/payments/پرداخت در محل' className='text-white hover:text-amber-400'>پرداخت در محل</Link>
                 </section>
                 {/* payments modal menu end */}
                 {/* discounts modal menu start */}
                 <section id='discounts2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('discounts')} className={showSubMenu === 'discounts' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>تخفیف ها</div>
-                    <Link className='text-white hover:text-amber-400'>کپن تخفیف</Link>
-                    <Link className='text-white hover:text-amber-400'>تخفیف عمومی</Link>
-                    <Link className='text-white hover:text-amber-400'>فروش شگفت انگیز</Link>
+                    <Link to='/dashboard/discounts/copan' className='text-white hover:text-amber-400'>کپن تخفیف</Link>
+                    <Link to='/dashboard/discounts/common' className='text-white hover:text-amber-400'>تخفیف عمومی</Link>
+                    <Link to='/dashboard/discounts/amazing-sales' className='text-white hover:text-amber-400'>فروش شگفت انگیز</Link>
                 </section>
                 {/* discounts modal menu end */}
                 {/* delivery modal menu start */}
@@ -460,7 +458,7 @@ const Sidebar = () => {
             {/* desktop menu sidebar end */}
 
             {/* mobile menu sidebar start */}
-            <section ref={mobileSidebar} className={isOpenMobileSidebar?'fixed h-[100vh] w-1/2 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden':'fixed h-[100vh] w-0 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden'}>
+            <section ref={mobileSidebar} className={isOpenMobileSidebar ? 'fixed h-[100vh] w-1/2 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden' : 'fixed h-[100vh] w-0 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden'}>
                 {/* mobile sidbar open start */}
                 <div className={isOpenMobileSidebar ?
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition' :
@@ -482,12 +480,11 @@ const Sidebar = () => {
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
+                            <Link to='/dashboard/service/attributes' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
                             <Link to='/dashboard/service/' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کالاها</Link> */}
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>انبار</Link> */}
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>نظرات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -499,12 +496,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 2 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 2 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'> جدید</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>در حال ارسال</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت نشده</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>باطل شده</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>مرجوعی</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام سفارشات</Link>
+                            <Link to='/dashboard/orders/سفارشات جدید' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'> جدید</Link>
+                            <Link to='/dashboard/orders/سفارشات در حال ارسال' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>در حال ارسال</Link>
+                            <Link to='/dashboard/orders/سفارشات پرداخت نشده' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت نشده</Link>
+                            <Link to='/dashboard/orders/سفارشات باطل شده' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>باطل شده</Link>
+                            <Link to='/dashboard/orders/سفارشات مرجوعی' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>مرجوعی</Link>
+                            <Link to='/dashboard/orders/همه سفارشات' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام سفارشات</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -516,10 +513,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 3 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 3 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام پرداخت ها</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آنلاین</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آفلاین</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت در محل</Link>
+                            <Link to='/dashboard/payments/همه پرداخت ها' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تمام پرداخت ها</Link>
+                            <Link to='/dashboard/payments/پرداخت های آنلاین' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آنلاین</Link>
+                            <Link to='/dashboard/payments/پرداخت های آفلاین' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت های آفلاین</Link>
+                            <Link to='/dashboard/payments/پرداخت در محل' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>پرداخت در محل</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -531,12 +528,12 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 4 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 4 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کپن تخفیف</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تخفیف عمومی</Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فروش شگفت انگیز</Link>
+                            <Link to='/dashboard/discounts/copan' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کپن تخفیف</Link>
+                            <Link to='/dashboard/discounts/common' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>تخفیف عمومی</Link>
+                            <Link to='/dashboard/discounts/amazing-sales' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فروش شگفت انگیز</Link>
                         </section>
                     </section>
-                    <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
+                    <Link to='/dashboard/delivery' onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                         <FontAwesomeIcon icon={['fas', 'shipping-fast']} flip='horizontal' />
                         <span>روش های ارسال</span>
                     </Link>

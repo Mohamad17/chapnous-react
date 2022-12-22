@@ -59,13 +59,13 @@ const ServiceIndex = () => {
                         </div>
                         <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
                             <h3 className="text-sm md:hidden"> وضعیت </h3>
-                            <h3 className="px-4 py-1 text-sm md:text-base text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 rounded-full"> فعال </h3>
+                            <h3 className="px-2 py-1 text-base md:text-sm text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 rounded-full"> فعال </h3>
                         </div>
                         <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
                             <h3 className="text-sm md:hidden"> تعداد انجام شده </h3>
-                            <h3 className="px-4 py-1 text-sm md:text-base"> 56 </h3>
+                            <h3> 56 </h3>
                         </div>
-                        <div className="flex px-4 justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
+                        <div className="flex justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
                             <div className="text-2xl md:text-sm text-purple-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-purple-400 cursor-pointer relative group">
                                 <Link to='/dashboard/service/edit'>
                                     <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'edit']} />
@@ -81,7 +81,7 @@ const ServiceIndex = () => {
                                     <div>بیشتر</div>
                                     <FontAwesomeIcon icon={['fas', 'angle-left']} className='group-hover:-rotate-90 mytransition' />
                                 </span>
-                                <div className="absolute top-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
+                                <div className="absolute bottom-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
                                     <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
                                         <FontAwesomeIcon icon={['fas', 'chess-board']} />
                                         <div>ویژگی های خدمات</div>
