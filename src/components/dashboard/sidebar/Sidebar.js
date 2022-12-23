@@ -33,12 +33,25 @@ const Sidebar = () => {
     //         }
     //    }
     const showSubmenu = e => {
-        let top = e.pageY;
+        e.preventDefault();
+        e.stopPropagation();
+        let top = e.clientY;
         let id = e.currentTarget.id;
         let menuBox = document.getElementById(`${id}2`);
-        // let windowHeight = window.innerHeight;
-        top = e.pageY - 25;
-        menuBox.style.top = `${top}px`;
+        let windowHeight = window.innerHeight;
+        top = e.clientY - 25;
+        if(menuBox.classList.contains('tooltips')){
+            menuBox.style.top = `${top}px`;
+        }else if(windowHeight<500 && e.clientY>200){
+            menuBox.style.top = null;
+            menuBox.style.bottom= "30px";
+        }else if(windowHeight<500 && e.clientY<200){
+            menuBox.style.bottom = null;
+            menuBox.style.top = `${top}px`;
+        }else{
+            menuBox.style.bottom = null;
+            menuBox.style.top = `${top}px`;
+        }
         return setShowSubMenu(e.currentTarget.id);
     }
 
@@ -59,7 +72,7 @@ const Sidebar = () => {
     return (
         <>
             {/* desktop menu sidebar start */}
-            <section className={isOpenSidebar ? 'md:w-1/5 lg:w-1/6 h-[100vh] hidden md:flex justify-end items-center relative' : 'md:w-[5vw] h-[100vh] hidden md:flex justify-end items-center relative'}>
+            <section className={isOpenSidebar ? 'md:w-1/5 lg:w-1/6 fixed z-[250000] top-0 right-0 h-[100vh] hidden md:flex justify-end items-center' : 'fixed z-[250000] top-0 right-0 md:w-[5vw] h-[100vh] hidden md:flex justify-end items-center'}>
                 {/* sidbar open start */}
                 <div className={isOpenSidebar ?
                     'overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 text-white hidden md:flex flex-col gap-y-2 h-[100vh] p-6 mytransition' :
@@ -146,11 +159,11 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 5 ? '-rotate-90 text-amber-300 mytransition' : 'text-amber-300'} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 5 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link className="flex items-center gap-x-2">
+                            <Link to='/dashboard/content/category/' className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'border-all']} />
                                 <span>دسته بندی</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            <Link to='/dashboard/content/post/' className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'sticky-note']} />
                                 <span>پست ها</span>
                             </Link>
@@ -273,7 +286,7 @@ const Sidebar = () => {
                         <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='orders'>
                             <FontAwesomeIcon icon={['fas', 'bars']} />
                         </section>
-                        <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='payments'>
+                        <section onTouchEnd={() => setShowSubMenu(false)} onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='payments'>
                             <FontAwesomeIcon icon={['far', 'credit-card']} />
                         </section>
                         <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='discounts'>
@@ -323,73 +336,73 @@ const Sidebar = () => {
                 {/* vitreen modal menu start */}
                 <section id='vitreen2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('vitreen')} className={showSubMenu === 'vitreen' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>ویترین</div>
-                    <Link to='/dashboard/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
-                    <Link to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
-                    <Link to='/dashboard/service/' className='text-white hover:text-amber-400'>خدمات</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/' className='text-white hover:text-amber-400'>خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>انبار</Link> */}
                 </section>
                 {/* vitreen modal menu end */}
                 {/* orders modal menu start */}
                 <section id='orders2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('orders')} className={showSubMenu === 'orders' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>سفارشات</div>
-                    <Link to='/dashboard/orders/سفارشات جدید' className='hover:text-amber-400'> جدید</Link>
-                    <Link to='/dashboard/orders/سفارشات در حال ارسال' className='text-white hover:text-amber-400'>در حال ارسال</Link>
-                    <Link to='/dashboard/orders/سفارشات پرداخت نشده' className='text-white hover:text-amber-400'>پرداخت نشده</Link>
-                    <Link to='/dashboard/orders/سفارشات باطل شده' className='text-white hover:text-amber-400'>باطل شده</Link>
-                    <Link to='/dashboard/orders/سفارشات مرجوعی' className='text-white hover:text-amber-400'>مرجوعی</Link>
-                    <Link to='/dashboard/orders/همه سفارشات' className='text-white hover:text-amber-400'>تمام سفارشات</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/سفارشات جدید' className='text-white hover:text-amber-400'> جدید</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/سفارشات در حال ارسال' className='text-white hover:text-amber-400'>در حال ارسال</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/سفارشات پرداخت نشده' className='text-white hover:text-amber-400'>پرداخت نشده</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/سفارشات باطل شده' className='text-white hover:text-amber-400'>باطل شده</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/سفارشات مرجوعی' className='text-white hover:text-amber-400'>مرجوعی</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/orders/همه سفارشات' className='text-white hover:text-amber-400'>تمام سفارشات</Link>
                 </section>
                 {/* orders modal menu end */}
                 {/* payments modal menu start */}
                 <section id='payments2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('payments')} className={showSubMenu === 'payments' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>پرداخت ها</div>
-                    <Link to='/dashboard/payments/همه پرداخت ها' className='text-white hover:text-amber-400'>تمام پرداخت ها</Link>
-                    <Link to='/dashboard/payments/پرداخت های آنلاین' className='text-white hover:text-amber-400'>پرداخت های آنلاین</Link>
-                    <Link to='/dashboard/payments/پرداخت های آفلاین' className='text-white hover:text-amber-400'>پرداخت های آفلاین</Link>
-                    <Link to='/dashboard/payments/پرداخت در محل' className='text-white hover:text-amber-400'>پرداخت در محل</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/payments/همه پرداخت ها' className='text-white hover:text-amber-400'>تمام پرداخت ها</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/payments/پرداخت های آنلاین' className='text-white hover:text-amber-400'>پرداخت های آنلاین</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/payments/پرداخت های آفلاین' className='text-white hover:text-amber-400'>پرداخت های آفلاین</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/payments/پرداخت در محل' className='text-white hover:text-amber-400'>پرداخت در محل</Link>
                 </section>
                 {/* payments modal menu end */}
                 {/* discounts modal menu start */}
                 <section id='discounts2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('discounts')} className={showSubMenu === 'discounts' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>تخفیف ها</div>
-                    <Link to='/dashboard/discounts/copan' className='text-white hover:text-amber-400'>کپن تخفیف</Link>
-                    <Link to='/dashboard/discounts/common' className='text-white hover:text-amber-400'>تخفیف عمومی</Link>
-                    <Link to='/dashboard/discounts/amazing-sales' className='text-white hover:text-amber-400'>فروش شگفت انگیز</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/discounts/copan' className='text-white hover:text-amber-400'>کپن تخفیف</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/discounts/common' className='text-white hover:text-amber-400'>تخفیف عمومی</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/discounts/amazing-sales' className='text-white hover:text-amber-400'>فروش شگفت انگیز</Link>
                 </section>
                 {/* discounts modal menu end */}
                 {/* delivery modal menu start */}
-                <span id='delivery2' className={showSubMenu === 'delivery' ? 'absolute z-[15500] right-2/3 flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden'}>روش های ارسال</span>
+                <span id='delivery2' className={showSubMenu === 'delivery' ? 'absolute z-[15500] right-2/3 flex tooltips justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden tooltips'}>روش های ارسال</span>
                 {/* delivery modal menu end */}
                 {/* content modal menu start */}
                 <section id='content2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('content')} className={showSubMenu === 'content' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>بخش محتوی</div>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/content/category/' className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'border-all']} />
                         <span>دسته بندی</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/content/post/' className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'sticky-note']} />
                         <span>پست ها</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'comment']} />
                         <span>نظرات</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'grip-vertical']} />
                         <span>منو</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'question']} />
                         <span>سوالات متداول</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'pager']} />
                         <span>پیج ساز</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'digital-tachograph']} />
                         <span>بنر ها</span>
                     </Link>
@@ -398,15 +411,15 @@ const Sidebar = () => {
                 {/* users modal menu start */}
                 <section id='users2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('users')} className={showSubMenu === 'users' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>کاربران</div>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'user-tie']} />
                         <span>کاربران ادمین</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'user']} />
                         <span>مشتریان</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'user-secret']} />
                         <span>سطوح دسترسی</span>
                     </Link>
@@ -415,50 +428,50 @@ const Sidebar = () => {
                 {/* tickets modal menu start */}
                 <section id='tickets2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('tickets')} className={showSubMenu === 'tickets' ? 'absolute right-1/2 text-sm w-40 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>تیکت ها</div>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'border-all']} />
                         <span> دسته بندی تیکت ها </span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['far', 'list-alt']} />
                         <span> اولویت تیکت ها </span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'user-check']} />
                         <span> ادمین تیکت ها </span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fab', 'medapps']} />
                         <span>تیکت های جدید</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fab', 'readme']} />
                         <span>تیکت های باز</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fab', 'stack-exchange']} />
                         <span>تیکت های بسته</span>
                     </Link>
-                    <Link className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'ticket-alt']} />
                         <span>همه ی تیکت ها</span>
                     </Link>
                 </section>
                 {/* tickets modal menu end */}
                 {/* email modal menu start */}
-                <span id='email2' className={showSubMenu === 'email' ? 'absolute z-[15500] right-2/3 flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden'}>اعلامیه ایمیلی</span>
+                <span id='email2' className={showSubMenu === 'email' ? 'absolute z-[15500] right-2/3 tooltips flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden tooltips'}>اعلامیه ایمیلی</span>
                 {/* email modal menu end */}
                 {/* message modal menu start */}
-                <span id='message2' className={showSubMenu === 'message' ? 'absolute z-[15500] right-2/3 flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden'}>اعلامیه پیامکی</span>
+                <span id='message2' className={showSubMenu === 'message' ? 'absolute z-[15500] right-2/3 tooltips flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden tooltips'}>اعلامیه پیامکی</span>
                 {/* message modal menu end */}
                 {/* setting modal menu start */}
-                <span id='setting2' className={showSubMenu === 'setting' ? 'absolute z-[15500] right-2/3 flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden'}>تنظیمات</span>
+                <span id='setting2' className={showSubMenu === 'setting' ? 'absolute z-[15500] right-2/3 tooltips flex justify-center items-center text-sm text-white pb-1 w-32 bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-600 rounded-md' : 'hidden tooltips'}>تنظیمات</span>
                 {/* setting modal menu end */}
             </section>
             {/* desktop menu sidebar end */}
 
             {/* mobile menu sidebar start */}
-            <section ref={mobileSidebar} className={isOpenMobileSidebar ? 'fixed h-[100vh] w-1/2 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden' : 'fixed h-[100vh] w-0 mytransition z-[25000] top-0 right-0 flex justify-end items-center md:hidden'}>
+            <section ref={mobileSidebar} className={isOpenMobileSidebar ? 'fixed h-[100vh] w-1/2 mytransition z-[250000] top-0 right-0 flex justify-end items-center md:hidden' : 'fixed h-[100vh] w-0 mytransition z-[250000] top-0 right-0 flex justify-end items-center md:hidden'}>
                 {/* mobile sidbar open start */}
                 <div className={isOpenMobileSidebar ?
                     'absolute top-0 right-0 h-[100vh] overflow-auto sidebar text-sm lg:text-base bg-purple-600 dark:bg-dark-600 myShadow text-white flex flex-col gap-y-2 w-full p-6 mytransition' :
@@ -545,11 +558,11 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 5 ? '-rotate-90 text-amber-300 mytransition' : 'text-amber-300'} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 5 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
+                            <Link to='/dashboard/content/category/' onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'border-all']} />
                                 <span>دسته بندی</span>
                             </Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
+                            <Link to='/dashboard/content/post/' onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'sticky-note']} />
                                 <span>پست ها</span>
                             </Link>

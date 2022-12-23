@@ -29,7 +29,7 @@ const ServiceAttributeIndex = () => {
             </div>
             {/* head page end */}
             {/* responsive table start */}
-            <section className="container mb-10 dark:text-zinc-200">
+            <section className="container dark:text-zinc-200">
                 {/* titles */}
                 <div className="hidden grid-cols-12 gap-4 p-4 text-sm md:grid title_color">
                     <div className="col-span-4 text-center"> نام فرم خدمات </div>

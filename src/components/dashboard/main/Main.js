@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { IsOpenSideBar } from '../../../context/dashboard/OpenSidebarProvider';
+import ContentCategoryCreate from '../../../pages/dashboard/blog/category/ContentCategoryCreate';
+import ContentCategoryEdit from '../../../pages/dashboard/blog/category/ContentCategoryEdit';
+import ContentCategoryIndex from '../../../pages/dashboard/blog/category/ContentCategoryIndex';
+import PostCreate from '../../../pages/dashboard/blog/post/PostCreate';
+import PostEdit from '../../../pages/dashboard/blog/post/PostEdit';
+import PostIndex from '../../../pages/dashboard/blog/post/PostIndex';
 import Home from '../../../pages/dashboard/Home';
 import CategoryCreate from '../../../pages/dashboard/shop/category/CategoryCreate';
 import CategoryEdit from '../../../pages/dashboard/shop/category/CategoryEdit';
@@ -31,10 +37,10 @@ import ServiceAttributeValueIndex from '../../../pages/dashboard/shop/services/s
 import Header from './Header';
 
 const Main = () => {
-    const {isOpenSidebar} = useContext(IsOpenSideBar);
+    const { isOpenSidebar } = useContext(IsOpenSideBar);
 
     return (
-        <section className={isOpenSidebar?'flex flex-col gap-y-6 w-full md:w-4/5 lg:w-5/6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[50px] main-cotainer py-2 px-4 lg:p-6':'flex flex-col gap-y-6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[25px] myTransition py-2 px-4 lg:p-6 md:w-[95vw]'}>
+        <section className={isOpenSidebar ? 'flex flex-col gap-y-6 w-full md:w-4/5 lg:w-5/6 order-2 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[50px] main-cotainer py-2 px-4 lg:p-6' : 'flex flex-col gap-y-6 bg-zinc-200 dark:bg-dark-700 min-h-screen md:rounded-r-[25px] myTransition py-2 px-4 lg:p-6 md:w-[95vw]'}>
             <Header />
             <Routes>
                 <Route path='/dashboard/' element={<Home />} />
@@ -84,6 +90,16 @@ const Main = () => {
                 <Route path='/dashboard/delivery/create' element={<DeliveryCreate />} />
                 <Route path='/dashboard/delivery/edit' element={<DeliveryEdit />} />
                 {/* delivery routes end */}
+                {/* content category routes start */}
+                <Route path='/dashboard/content/category/' element={<ContentCategoryIndex />} />
+                <Route path='/dashboard/content/category/create' element={<ContentCategoryCreate />} />
+                <Route path='/dashboard/content/category/edit' element={<ContentCategoryEdit />} />
+                {/* content category routes end */}
+                {/* possts routes start */}
+                <Route path='/dashboard/content/post/' element={<PostIndex />} />
+                <Route path='/dashboard/content/post/create' element={<PostCreate />} />
+                <Route path='/dashboard/content/post/edit' element={<PostEdit />} />
+                {/* posts routes end */}
             </Routes>
         </section>
     );
