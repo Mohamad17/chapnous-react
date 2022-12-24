@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const PostCard = () => {
     return (
-        <div className='col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-y-2 p-4 bg-purple-200 dark:bg-dark-800 rounded-lg'>
+        <div className='col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-y-2 p-4 bg-purple-300 dark:bg-dark-800 rounded-lg'>
             {/* headcard start */}
             <section className='flex items-center justify-between pb-2 border-b border-purple-300 dark:border-purple-600'>
                 <div className="flex items-center gap-x-2">
@@ -22,14 +22,14 @@ const PostCard = () => {
                 <div className="relative group">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-more-vertical w-4 h-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
                     <div className="absolute top-1/2 left-1/3 hidden opacity-0 group-hover:opacity-100 text-sm w-[9rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
-                        <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                        <Link to='/dashboard/content/post/show' className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
                             <FontAwesomeIcon icon={['fas', 'eye']} />
                             <div>نمایش</div>
-                        </span>
-                        <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                        </Link>
+                        <Link to='/dashboard/content/post/edit' className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
                             <FontAwesomeIcon icon={['fas', 'edit']} />
                             <div>ویرایش</div>
-                        </span>
+                        </Link>
                         <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
                             <FontAwesomeIcon icon={['fas', 'trash']} />
                             <div>حذف</div>

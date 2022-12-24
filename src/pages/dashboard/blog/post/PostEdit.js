@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DatePicker } from "jalali-react-datepicker";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from 'ckeditor5-build-classic';
 import { WithContext as ReactTags } from 'react-tag-input';
 const KeyCodes = {
     comma: 188,
@@ -41,29 +44,34 @@ const PostEdit = () => {
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/content/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش محتوی</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/content/post'>مقاله ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
-                <p>ایجاد مقاله</p>
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/content/post'>پست ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
+                <p>ایجاد پست</p>
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ایجاد مقاله</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ایجاد پست</p>
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
-                {/* name */}
+                {/* title */}
                 <div className="form-group">
-                    <label htmlFor='name'>نام مقاله</label>
-                    <input id='name' name='name' type='text' className='input-form' />
+                    <label htmlFor='title'>عنوان پست</label>
+                    <input id='title' name='title' type='text' className='input-form' />
                 </div>
-                {/* parent post */}
+                {/* category */}
                 <div className="form-group">
-                    <label htmlFor='parent_id'>دسته والد</label>
-                    <select id='parent_id' name='parent_id' className='select-input'>
-                        <option>انتخاب دسته والد</option>
+                    <label htmlFor='category_id'>دسته بندی</label>
+                    <select id='category_id' name='category_id' className='select-input'>
+                        <option>انتخاب دسته بندی</option>
                         <option value='1'>چاپ دیجیتال</option>
                         <option value='2'>چاپ دیجیتال</option>
                         <option value='3'>چاپ دیجیتال</option>
                     </select>
+                </div>
+                {/* image */}
+                <div className="form-group">
+                    <label htmlFor='image'>تصویر</label>
+                    <input id='image' name='image' type='file' className='input-form' />
                 </div>
                 {/* status */}
                 <div className="form-group">
@@ -73,10 +81,18 @@ const PostEdit = () => {
                         <option value='2'>فعال</option>
                     </select>
                 </div>
-                {/* image */}
+                {/* commentable */}
                 <div className="form-group">
-                    <label htmlFor='image'>تصویر</label>
-                    <input id='image' name='image' type='file' className='input-form' />
+                    <label htmlFor='commentable'>امکان درج نظر</label>
+                    <select id='commentable' name='commentable' className='select-input'>
+                        <option value='1'>قابل درج نظر</option>
+                        <option value='2'>غیر قابل درج نظر</option>
+                    </select>
+                </div>
+                {/* publish date */}
+                <div className='form-group datepicker'>
+                    <label htmlFor='publish_date'>تاریخ انتشار</label>
+                    <DatePicker onClickSubmitButton={(e) => console.log(e.value)} />
                 </div>
                 {/* tags */}
                 <div className="col-span-8 flex flex-col gap-y-2">
@@ -91,6 +107,30 @@ const PostEdit = () => {
                         handleTagClick={handleTagClick}
                         inputFieldPosition="bottom"
                         autocomplete
+                    />
+                </div>
+                {/* body */}
+                <div className="textEditor col-span-8 flex flex-col gap-y-2">
+                    <label>متن</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data=""
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({ event, editor, data });
+                        }}
+                    />
+                </div>
+                {/* summery */}
+                <div className="textEditor col-span-8 flex flex-col gap-y-2">
+                    <label>خلاصه متن</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data=""
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({ event, editor, data });
+                        }}
                     />
                 </div>
                 <button type='submit' className='submitbtn'>افزودن</button>

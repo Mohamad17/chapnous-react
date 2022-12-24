@@ -7,6 +7,7 @@ import ContentCategoryIndex from '../../../pages/dashboard/blog/category/Content
 import PostCreate from '../../../pages/dashboard/blog/post/PostCreate';
 import PostEdit from '../../../pages/dashboard/blog/post/PostEdit';
 import PostIndex from '../../../pages/dashboard/blog/post/PostIndex';
+import PostShow from '../../../pages/dashboard/blog/post/PostShow';
 import Home from '../../../pages/dashboard/Home';
 import CategoryCreate from '../../../pages/dashboard/shop/category/CategoryCreate';
 import CategoryEdit from '../../../pages/dashboard/shop/category/CategoryEdit';
@@ -99,6 +100,7 @@ const Main = () => {
                 <Route path='/dashboard/content/post/' element={<PostIndex />} />
                 <Route path='/dashboard/content/post/create' element={<PostCreate />} />
                 <Route path='/dashboard/content/post/edit' element={<PostEdit />} />
+                <Route path='/dashboard/content/post/show' element={<PostShow />} />
                 {/* posts routes end */}
             </Routes>
         </section>
