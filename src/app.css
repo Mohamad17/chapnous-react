@@ -38,5 +38,8 @@
     .reply-comment{
         @apply w-[87%] self-end bg-zinc-300 dark:bg-zinc-900 border-zinc-500 dark:border-zinc-400 rounded-lg flex flex-col gap-y-2 p-4;
     }
+    .dropdownBtn{
+        @apply bg-purple-700 dark:bg-cyan-400 text-zinc-200 dark:text-zinc-700 border border-purple-400 rounded-md py-1 px-3 flex items-center justify-center gap-x-3;
+    }
 }
 @tailwind utilities;
