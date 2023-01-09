@@ -64,8 +64,7 @@ const DeliveryIndex = () => {
                             </div>
                         </div>
                     </div>
-
-                </div>
+                 </div>
             </section>
             {/* responsive table end */}
         </div>

@@ -1,0 +1,1 @@
+export const BaseApi= 'http://localhost/chapnous-app/public/api/'

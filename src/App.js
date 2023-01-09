@@ -3,6 +3,7 @@ import Sidebar from './components/dashboard/sidebar/Sidebar';
 import Main from './components/dashboard/main/Main';
 import OpenSidebarProvider from './context/dashboard/OpenSidebarProvider';
 import ThemePanelProvider from './context/dashboard/ThemePanelProvider';
+import ServiceCategoriesProvider from './context/dashboard/ServiceCategoriesProvider';
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <OpenSidebarProvider>
         <ThemePanelProvider>
           <Sidebar />
-          <Main />
+          <ServiceCategoriesProvider>
+            <Main />
+          </ServiceCategoriesProvider>
         </ThemePanelProvider>
       </OpenSidebarProvider>
     </section>

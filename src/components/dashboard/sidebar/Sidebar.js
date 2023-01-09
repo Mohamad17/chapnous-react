@@ -93,7 +93,7 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link className='hover:text-amber-400'>برندها</Link> */}
                             <Link to='/dashboard/service/' className='hover:text-amber-400'>خدمات</Link>
@@ -179,10 +179,10 @@ const Sidebar = () => {
                                 <FontAwesomeIcon icon={['fas', 'question']} />
                                 <span>سوالات متداول</span>
                             </Link>
-                            <Link className="flex items-center gap-x-2">
+                            {/* <Link className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'pager']} />
                                 <span>پیج ساز</span>
-                            </Link>
+                            </Link> */}
                             <Link to='/dashboard/content/banners/' className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'digital-tachograph']} />
                                 <span>بنر ها</span>
@@ -336,7 +336,7 @@ const Sidebar = () => {
                 {/* vitreen modal menu start */}
                 <section id='vitreen2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('vitreen')} className={showSubMenu === 'vitreen' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>ویترین</div>
-                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
@@ -398,10 +398,10 @@ const Sidebar = () => {
                         <FontAwesomeIcon icon={['fas', 'question']} />
                         <span>سوالات متداول</span>
                     </Link>
-                    <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
+                    {/* <Link onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'pager']} />
                         <span>پیج ساز</span>
-                    </Link>
+                    </Link> */}
                     <Link to='/dashboard/content/banners/' onClick={() => setShowSubMenu(false)} className="flex items-center gap-x-2 text-white hover:text-amber-400">
                         <FontAwesomeIcon icon={['fas', 'digital-tachograph']} />
                         <span>بنر ها</span>
@@ -492,7 +492,7 @@ const Sidebar = () => {
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
                             <Link to='/dashboard/service/' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
@@ -578,10 +578,10 @@ const Sidebar = () => {
                                 <FontAwesomeIcon icon={['fas', 'question']} />
                                 <span>سوالات متداول</span>
                             </Link>
-                            <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
+                            {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'pager']} />
                                 <span>پیج ساز</span>
-                            </Link>
+                            </Link> */}
                             <Link to='/dashboard/content/banners/' onClick={() => setIsOpenMobileSidebar(false)} className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'digital-tachograph']} />
                                 <span>بنر ها</span>

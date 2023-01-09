@@ -19,32 +19,32 @@ import PostShow from '../../../pages/dashboard/blog/post/PostShow';
 import Home from '../../../pages/dashboard/Home';
 import SettingEdit from '../../../pages/dashboard/setting/SettingEdit';
 import SettingIndex from '../../../pages/dashboard/setting/SettingIndex';
-import CategoryCreate from '../../../pages/dashboard/shop/category/CategoryCreate';
-import CategoryEdit from '../../../pages/dashboard/shop/category/CategoryEdit';
-import CategoryIndex from '../../../pages/dashboard/shop/category/CategoryIndex';
-import DeliveryCreate from '../../../pages/dashboard/shop/delivery/DeliveryCreate';
-import DeliveryEdit from '../../../pages/dashboard/shop/delivery/DeliveryEdit';
-import DeliveryIndex from '../../../pages/dashboard/shop/delivery/DeliveryIndex';
-import AmazingCreate from '../../../pages/dashboard/shop/discount/amazing/AmazingCreate';
-import AmazingEdit from '../../../pages/dashboard/shop/discount/amazing/AmazingEdit';
-import AmazingIndex from '../../../pages/dashboard/shop/discount/amazing/AmazingIndex';
-import CommonCreate from '../../../pages/dashboard/shop/discount/common/CommonCreate';
-import CommonEdit from '../../../pages/dashboard/shop/discount/common/CommonEdit';
-import CommonIndex from '../../../pages/dashboard/shop/discount/common/CommonIndex';
-import CopanCreate from '../../../pages/dashboard/shop/discount/copan/CopanCreate';
-import CopanEdit from '../../../pages/dashboard/shop/discount/copan/CopanEdit';
-import CopanIndex from '../../../pages/dashboard/shop/discount/copan/CopanIndex';
-import OrderIndex from '../../../pages/dashboard/shop/order/OrderIndex';
-import PaymentIndex from '../../../pages/dashboard/shop/payment/PaymentIndex';
-import ServiceCreate from '../../../pages/dashboard/shop/services/ServiceCreate';
-import ServiceEdit from '../../../pages/dashboard/shop/services/ServiceEdit';
-import ServiceIndex from '../../../pages/dashboard/shop/services/ServiceIndex';
-import ServiceAttributeCreate from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeCreate';
-import ServiceAttributeEdit from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeEdit';
-import ServiceAttributeIndex from '../../../pages/dashboard/shop/services/service_attribute/ServiceAttributeIndex';
-import ServiceAttributeValueCreate from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueCreate';
-import ServiceAttributeValueEdit from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueEdit';
-import ServiceAttributeValueIndex from '../../../pages/dashboard/shop/services/service_attribute_value/ServiceAttributeValueIndex';
+import CategoryCreate from '../../../pages/dashboard/services/category/CategoryCreate';
+import CategoryEdit from '../../../pages/dashboard/services/category/CategoryEdit';
+import CategoryIndex from '../../../pages/dashboard/services/category/CategoryIndex';
+import DeliveryCreate from '../../../pages/dashboard/services/delivery/DeliveryCreate';
+import DeliveryEdit from '../../../pages/dashboard/services/delivery/DeliveryEdit';
+import DeliveryIndex from '../../../pages/dashboard/services/delivery/DeliveryIndex';
+import AmazingCreate from '../../../pages/dashboard/services/discount/amazing/AmazingCreate';
+import AmazingEdit from '../../../pages/dashboard/services/discount/amazing/AmazingEdit';
+import AmazingIndex from '../../../pages/dashboard/services/discount/amazing/AmazingIndex';
+import CommonCreate from '../../../pages/dashboard/services/discount/common/CommonCreate';
+import CommonEdit from '../../../pages/dashboard/services/discount/common/CommonEdit';
+import CommonIndex from '../../../pages/dashboard/services/discount/common/CommonIndex';
+import CopanCreate from '../../../pages/dashboard/services/discount/copan/CopanCreate';
+import CopanEdit from '../../../pages/dashboard/services/discount/copan/CopanEdit';
+import CopanIndex from '../../../pages/dashboard/services/discount/copan/CopanIndex';
+import OrderIndex from '../../../pages/dashboard/services/order/OrderIndex';
+import PaymentIndex from '../../../pages/dashboard/services/payment/PaymentIndex';
+import ServiceCreate from '../../../pages/dashboard/services/services/ServiceCreate';
+import ServiceEdit from '../../../pages/dashboard/services/services/ServiceEdit';
+import ServiceIndex from '../../../pages/dashboard/services/services/ServiceIndex';
+import ServiceAttributeCreate from '../../../pages/dashboard/services/services/service_attribute/ServiceAttributeCreate';
+import ServiceAttributeEdit from '../../../pages/dashboard/services/services/service_attribute/ServiceAttributeEdit';
+import ServiceAttributeIndex from '../../../pages/dashboard/services/services/service_attribute/ServiceAttributeIndex';
+import ServiceAttributeValueCreate from '../../../pages/dashboard/services/services/service_attribute_value/ServiceAttributeValueCreate';
+import ServiceAttributeValueEdit from '../../../pages/dashboard/services/services/service_attribute_value/ServiceAttributeValueEdit';
+import ServiceAttributeValueIndex from '../../../pages/dashboard/services/services/service_attribute_value/ServiceAttributeValueIndex';
 import AdminTicketIndex from '../../../pages/dashboard/ticket/admin-ticket/AdminTicketIndex';
 import CategoryTicketCreate from '../../../pages/dashboard/ticket/category-ticket/CategoryTicketCreate';
 import CategoryTicketEdit from '../../../pages/dashboard/ticket/category-ticket/CategoryTicketEdit';
@@ -60,6 +60,7 @@ import CustomerCreate from '../../../pages/dashboard/user/customer/CustomerCreat
 import CustomerEdit from '../../../pages/dashboard/user/customer/CustomerEdit';
 import CustomerIndex from '../../../pages/dashboard/user/customer/CustomerIndex';
 import Header from './Header';
+import ServiceCategoriesProvider from '../../../context/dashboard/ServiceCategoriesProvider';
 
 const Main = () => {
     const { isOpenSidebar } = useContext(IsOpenSideBar);
@@ -70,9 +71,9 @@ const Main = () => {
             <Routes>
                 <Route path='/dashboard/' element={<Home />} />
                 {/* category routes start */}
-                <Route path='/dashboard/category/' element={<CategoryIndex />} />
-                <Route path='/dashboard/category/create' element={<CategoryCreate />} />
-                <Route path='/dashboard/category/edit' element={<CategoryEdit />} />
+                <Route path='/dashboard/service/category/' element={<CategoryIndex />} />
+                <Route path='/dashboard/service/category/create' element={<CategoryCreate />} />
+                <Route path='/dashboard/service/category/edit' element={<CategoryEdit />} />
                 {/* category routes end */}
                 {/* services routes start */}
                 <Route path='/dashboard/service/' element={<ServiceIndex />} />

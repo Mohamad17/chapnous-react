@@ -9,7 +9,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const CategoryEdit = () => {
+const CategoryCreate = () => {
     const [tags, setTags] = useState([]);
 
     const handleDelete = i => {
@@ -41,12 +41,12 @@ const CategoryEdit = () => {
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
-                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/category'>دسته بندی ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
-                <p>ویرایش دسته بندی</p>
+                <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/service/category'>دسته بندی ها</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
+                <p>ایجاد دسته بندی</p>
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش دسته بندی</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ایجاد دسته بندی</p>
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
@@ -55,7 +55,7 @@ const CategoryEdit = () => {
                     <label htmlFor='name'>نام دسته بندی</label>
                     <input id='name' name='name' type='text' className='input-form' />
                 </div>
-                {/* parent_id */}
+                {/* parent category */}
                 <div className="form-group">
                     <label htmlFor='parent_id'>دسته والد</label>
                     <select id='parent_id' name='parent_id' className='select-input'>
@@ -93,11 +93,11 @@ const CategoryEdit = () => {
                         autocomplete
                     />
                 </div>
-                <button type='submit' className='submitbtn'>ویرایش</button>
+                <button type='submit' className='submitbtn'>افزودن</button>
             </form>
             {/* form end */}
         </div>
     );
 };
 
-export default CategoryEdit;
+export default CategoryCreate;
