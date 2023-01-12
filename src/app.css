@@ -42,10 +42,10 @@
         @apply bg-purple-700 dark:bg-cyan-400 text-zinc-200 dark:text-zinc-700 border border-purple-400 rounded-md py-1 px-3 flex items-center justify-center gap-x-3;
     }
     .status-green{
-        @apply px-2 py-1 text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 rounded-full;
+        @apply px-2 py-1 text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 text-sm rounded-full;
     }
     .status-red{
-        @apply px-2 py-1 text-red-500 bg-red-200 dark:text-red-800 dark:bg-red-400 rounded-full;
+        @apply px-2 py-1 text-red-500 bg-red-200 dark:text-red-800 dark:bg-red-400 text-sm rounded-full;
     }
 }
 
