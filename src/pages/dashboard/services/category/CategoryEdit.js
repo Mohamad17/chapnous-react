@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from 'ckeditor5-build-classic';
+import { nanoid } from 'nanoid';
+import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
+import { getServiceCategory, updateCategoryService } from '../../../../service/dashboard/services/getCategoryServices';
 const KeyCodes = {
     comma: 188,
     enter: 13
@@ -11,14 +16,35 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const CategoryEdit = () => {
     const [tags, setTags] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [parentId, setParentId] = useState('');
+    const { categories } = useContext(ServiceCategories);
+    const params = useParams();
+
+    const [data, setData] = useState([]);
+    // const [data, setData] = useState({
+    //     name: category.name,
+    //     parent_id: category.parent? category.parent.id:'',
+    //     description: category.description,
+    //     status: category.status,
+    //     image: '',
+    // });
+    // const [data, setData] = useState({
+    //     name: '',
+    //     parent_id: '',
+    //     status: 1,
+    // });
+    // console.log(data)
 
     const handleDelete = i => {
-        setTags(tags.filter((tag, index) => index !== i));
+        const newTags = tags.filter((tag, index) => index !== i);
+        setTags(newTags);
     };
 
     const handleAddition = tag => {
         setTags([...tags, tag]);
-        console.log(tags)
     };
 
     const handleDrag = (tag, currPos, newPos) => {
@@ -31,13 +57,59 @@ const CategoryEdit = () => {
         setTags(newTags);
     };
 
-    const handleTagClick = index => {
-        console.log('The tag at index ' + index + ' was clicked');
+    const selectFile = (event) => {
+        setImage(event.target.files[0])
     };
+
+    const submit = async (e) => {
+        e.preventDefault();
+        let selectedTags = [];
+        tags.map(tag => selectedTags.push(tag.text));
+        let saveTags = selectedTags.toString();
+        let formData = new FormData();
+        formData.append("_method", "put");
+        if(image){
+            formData.append("image", image);
+        }
+        if(parentId){
+            formData.append("parent_id", parentId);
+        }
+        formData.append("name", data.name);
+        formData.append("description", description);
+        formData.append("status", data.status);
+        formData.append("tags", saveTags);
+        console.log(formData)
+        const response = await updateCategoryService(formData, category.id);
+        console.log(response)
+    }
+
+    useEffect(() => {
+        const fetch = async () => {
+            let objArr = [];
+            // let objTemplate= {id:'', text:''};
+            let response = await getServiceCategory(params.id);
+            setCategory(response.data);
+            setData(response.data);
+            setParentId(response.parent_id)
+            // setData({
+            //     name: response.name,
+            //     parent_id: response.parnet? response.parant.id: '',
+            //     status: response.status,
+            // });
+            let arrTags = response.data.tags.split('،');
+            arrTags.map(tag => (
+                objArr.push({ id: tag, text: tag })
+            ))
+            setTags(objArr);
+        }
+        fetch();
+    }, [params])
 
     return (
         <div className='flex flex-col items-center gap-y-4 px-4'>
             {/* breadcrumb start */}
+            {console.log(parentId)}
+            {console.log(data)}
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
@@ -46,37 +118,42 @@ const CategoryEdit = () => {
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش دسته بندی</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش {category.name}</p>
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
                 {/* name */}
                 <div className="form-group">
                     <label htmlFor='name'>نام دسته بندی</label>
-                    <input id='name' name='name' type='text' className='input-form' />
+                    <input id='name' name='name' type='text' value={data.name} onChange={e => setData({ ...data, name: e.target.value })} className='input-form' />
                 </div>
-                {/* parent_id */}
+                {/* parent category */}
                 <div className="form-group">
                     <label htmlFor='parent_id'>دسته والد</label>
-                    <select id='parent_id' name='parent_id' className='select-input'>
-                        <option>انتخاب دسته والد</option>
-                        <option value='1'>چاپ دیجیتال</option>
-                        <option value='2'>چاپ دیجیتال</option>
-                        <option value='3'>چاپ دیجیتال</option>
+                    <select onChange={e => setParentId(e.target.value)} value={parentId} id='parent_id' name='parent_id' className='select-input'>
+                        <option value=''>انتخاب دسته والد</option>
+                        {
+                            categories.map(category => (
+                                <option key={nanoid()} value={category.id}>{category.name}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 {/* status */}
                 <div className="form-group">
                     <label htmlFor='status'>وضعیت</label>
-                    <select id='status' name='status' className='select-input'>
-                        <option value='1'>غیر فعال</option>
-                        <option value='2'>فعال</option>
+                    <select onChange={e => setData({ ...data, status: e.target.value })} value={data.status} id='status' name='status' className='select-input'>
+                        <option value='0'>غیر فعال</option>
+                        <option value='1'>فعال</option>
                     </select>
                 </div>
                 {/* image */}
                 <div className="form-group">
                     <label htmlFor='image'>تصویر</label>
-                    <input id='image' name='image' type='file' className='input-form' />
+                    <input onChange={e => selectFile(e)} id='image' name='image' type='file' className='input-form' />
+                    {
+                        category.image !== null ? <img src={category.image} alt={category.name} className="w-1/2" /> : ""
+                    }
                 </div>
                 {/* tags */}
                 <div className="col-span-8 flex flex-col gap-y-2">
@@ -88,12 +165,23 @@ const CategoryEdit = () => {
                         handleAddition={handleAddition}
                         handleDrag={handleDrag}
                         placeholder="افزودن تگ ها"
-                        handleTagClick={handleTagClick}
                         inputFieldPosition="bottom"
                         autocomplete
                     />
                 </div>
-                <button type='submit' className='submitbtn'>ویرایش</button>
+                {/* discription */}
+                <div className="textEditor col-span-8 flex flex-col gap-y-2">
+                    <label>معرفی محصول</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={category.description}
+                        onChange={(event, editor) => {
+                            const text = editor.getData();
+                            setDescription(text)
+                        }}
+                    />
+                </div>
+                <button onClick={e => submit(e)} type='button' className='submitbtn'>ویرایش</button>
             </form>
             {/* form end */}
         </div>

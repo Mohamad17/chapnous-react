@@ -60,7 +60,6 @@ import CustomerCreate from '../../../pages/dashboard/user/customer/CustomerCreat
 import CustomerEdit from '../../../pages/dashboard/user/customer/CustomerEdit';
 import CustomerIndex from '../../../pages/dashboard/user/customer/CustomerIndex';
 import Header from './Header';
-import ServiceCategoriesProvider from '../../../context/dashboard/ServiceCategoriesProvider';
 
 const Main = () => {
     const { isOpenSidebar } = useContext(IsOpenSideBar);
@@ -73,7 +72,7 @@ const Main = () => {
                 {/* category routes start */}
                 <Route path='/dashboard/service/category/' element={<CategoryIndex />} />
                 <Route path='/dashboard/service/category/create' element={<CategoryCreate />} />
-                <Route path='/dashboard/service/category/edit' element={<CategoryEdit />} />
+                <Route path='/dashboard/service/category/edit/:id' element={<CategoryEdit />} />
                 {/* category routes end */}
                 {/* services routes start */}
                 <Route path='/dashboard/service/' element={<ServiceIndex />} />

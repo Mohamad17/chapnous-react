@@ -17,27 +17,22 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 const CategoryCreate = () => {
     const [tags, setTags] = useState([]);
     const { categories } = useContext(ServiceCategories);
-    // const [currentFile, setCurrentFile] = useState(null);
-    // const [progress, setProgress] = useState(0);
     const [data, setData] = useState({
         name: '',
         parent_id: '',
         description: '',
         status: 1,
         image: '',
-        tags: []
     });
 
 
     const handleDelete = i => {
         const newTags = tags.filter((tag, index) => index !== i);
         setTags(newTags);
-        setData({ ...data, tags: newTags })
     };
 
     const handleAddition = tag => {
         setTags([...tags, tag]);
-        setData({ ...data, tags: [...data.tags, tag] })
     };
 
     const handleDrag = (tag, currPos, newPos) => {
@@ -48,7 +43,6 @@ const CategoryCreate = () => {
 
         // re-render
         setTags(newTags);
-        setData({ ...data, tags: newTags })
     };
 
     const selectFile = (event) => {
@@ -59,8 +53,7 @@ const CategoryCreate = () => {
         e.preventDefault();
         let selectedTags=[];
         console.log(data.parent_id)
-
-        data.tags.map(tag=> selectedTags.push(tag.text));
+        tags.map(tag=> selectedTags.push(tag.text));
         let saveTags= selectedTags.toString();
         let formData = new FormData();
         formData.append("image", data.image);
