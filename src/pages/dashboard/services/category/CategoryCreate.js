@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from 'ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { nanoid } from 'nanoid'
 import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
 import { setCategoryService } from '../../../../service/dashboard/services/getCategoryServices';
