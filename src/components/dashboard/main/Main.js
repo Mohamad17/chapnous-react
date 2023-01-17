@@ -75,9 +75,9 @@ const Main = () => {
                 <Route path='/dashboard/service/category/edit/:id' element={<CategoryEdit />} />
                 {/* category routes end */}
                 {/* services routes start */}
-                <Route path='/dashboard/service/' element={<ServiceIndex />} />
+                <Route path='/dashboard/service/service' element={<ServiceIndex />} />
                 <Route path='/dashboard/service/create' element={<ServiceCreate />} />
-                <Route path='/dashboard/service/edit' element={<ServiceEdit />} />
+                <Route path='/dashboard/service/edit/:id' element={<ServiceEdit />} />
                 {/* services routes end */}
                 {/* services attributes routes start */}
                 <Route path='/dashboard/service/attributes' element={<ServiceAttributeIndex />} />

@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { nanoid } from 'nanoid'
 import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
-import { setCategoryService } from '../../../../service/dashboard/services/getCategoryServices';
+import { setCategoryService , getServiceCategories } from '../../../../service/dashboard/services/getCategoryServices';
+import { Message } from '../../../../context/dashboard/MessageAlertProvider';
 const KeyCodes = {
     comma: 188,
     enter: 13
@@ -16,7 +17,7 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const CategoryCreate = () => {
     const [tags, setTags] = useState([]);
-    const { categories } = useContext(ServiceCategories);
+    const { categories , setCategories } = useContext(ServiceCategories);
     const [data, setData] = useState({
         name: '',
         parent_id: '',
@@ -24,7 +25,9 @@ const CategoryCreate = () => {
         status: 1,
         image: '',
     });
-
+    const {setMessage} = useContext(Message);
+    const [errors, setErrors] = useState([]);
+    const navigate= useNavigate();
 
     const handleDelete = i => {
         const newTags = tags.filter((tag, index) => index !== i);
@@ -52,7 +55,6 @@ const CategoryCreate = () => {
     const submit = async(e) => {
         e.preventDefault();
         let selectedTags=[];
-        console.log(data.parent_id)
         tags.map(tag=> selectedTags.push(tag.text));
         let saveTags= selectedTags.toString();
         let formData = new FormData();
@@ -63,7 +65,13 @@ const CategoryCreate = () => {
         formData.append("status", data.status);
         formData.append("tags", saveTags);
         const response= await setCategoryService(formData);
-        console.log(response)
+        if(response.status==='success'){
+            setCategories(await getServiceCategories());
+            setMessage(response.message);
+            navigate("/dashboard/service/category/");
+        }else{
+            setErrors(response)
+        }
     }
 
     return (
@@ -80,11 +88,12 @@ const CategoryCreate = () => {
             <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ایجاد دسته بندی</p>
             {/* head page end */}
             {/* form start */}
-            <form action="#" className='form' method="post" type="multipart/form-data">
+            <form action="#" className='form' method="post" encType="multipart/form-data">
                 {/* name */}
                 <div className="form-group">
                     <label htmlFor='name'>نام دسته بندی</label>
                     <input id='name' name='name' type='text' value={data.name} onChange={e => setData({ ...data, name: e.target.value })} className='input-form' />
+                    {errors.name && <span className='error-validation'>{errors.name}</span>}
                 </div>
                 {/* parent category */}
                 <div className="form-group">
@@ -97,6 +106,7 @@ const CategoryCreate = () => {
                             ))
                         }
                     </select>
+                    {errors.parent_id && <span className='error-validation'>{errors.parent_id}</span>}
                 </div>
                 {/* status */}
                 <div className="form-group">
@@ -105,11 +115,13 @@ const CategoryCreate = () => {
                         <option value='0'>غیر فعال</option>
                         <option value='1'>فعال</option>
                     </select>
+                    {errors.status && <span className='error-validation'>{errors.status}</span>}
                 </div>
                 {/* image */}
                 <div className="form-group">
                     <label htmlFor='image'>تصویر</label>
                     <input onChange={e => selectFile(e)} id='image' name='image' type='file' className='input-form' />
+                    {errors.image && <span className='error-validation'>{errors.image}</span>}
                 </div>
                 {/* tags */}
                 <div className="col-span-8 flex flex-col gap-y-2">
@@ -124,8 +136,9 @@ const CategoryCreate = () => {
                         inputFieldPosition="bottom"
                         autocomplete
                     />
+                    {errors.tags && <span className='error-validation'>{errors.tags}</span>}
                 </div>
-                {/* discription */}
+                {/* description */}
                 <div className="textEditor col-span-8 flex flex-col gap-y-2">
                     <label>معرفی محصول</label>
                     <CKEditor
@@ -136,6 +149,7 @@ const CategoryCreate = () => {
                             setData({ ...data, description: text })
                         }}
                     />
+                    {errors.description && <span className='error-validation'>{errors.description}</span>}
                 </div>
                 <button onClick={e => submit(e)} type='button' className='submitbtn'>افزودن</button>
             </form>

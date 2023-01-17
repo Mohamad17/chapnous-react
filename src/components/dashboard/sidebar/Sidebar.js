@@ -23,15 +23,7 @@ const Sidebar = () => {
         setIsOpenMobileSidebar(!isOpenMobileSidebar);
         setActiveMenu(false);
     }
-    //    const wheelMinimalSidebar = e => {
-    //         let trueHeightSidebar= e.currentTarget.children.item(0).clientHeight + e.currentTarget.children.item(1).clientHeight + e.currentTarget.children.item(2).clientHeight;
-    //         // console.log(trueHeightSidebar)
-    //         let windowHeight = window.innerHeight;
-    //         let defHeigt= trueHeightSidebar - windowHeight;
-    //         if(trueHeightSidebar > windowHeight) {
-    //             e.currentTarget.style.transform = `translateY(-${defHeigt}px)`;
-    //         }
-    //    }
+
     const showSubmenu = e => {
         e.preventDefault();
         e.stopPropagation();
@@ -40,15 +32,15 @@ const Sidebar = () => {
         let menuBox = document.getElementById(`${id}2`);
         let windowHeight = window.innerHeight;
         top = e.clientY - 25;
-        if(menuBox.classList.contains('tooltips')){
+        if (menuBox.classList.contains('tooltips')) {
             menuBox.style.top = `${top}px`;
-        }else if(windowHeight<500 && e.clientY>200){
+        } else if (windowHeight < 500 && e.clientY > 200) {
             menuBox.style.top = null;
-            menuBox.style.bottom= "30px";
-        }else if(windowHeight<500 && e.clientY<200){
+            menuBox.style.bottom = "30px";
+        } else if (windowHeight < 500 && e.clientY < 200) {
             menuBox.style.bottom = null;
             menuBox.style.top = `${top}px`;
-        }else{
+        } else {
             menuBox.style.bottom = null;
             menuBox.style.top = `${top}px`;
         }
@@ -88,17 +80,30 @@ const Sidebar = () => {
                         <section id='1' onClick={(e) => submenuHandle(e)} className='flex items-center justify-between w-full cursor-pointer'>
                             <div className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'chart-bar']} flip='horizontal' />
-                                <span>ویترین</span>
+                                <span>خدمات</span>
                             </div>
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم خدمات</Link>
-                            {/* <Link className='hover:text-amber-400'>برندها</Link> */}
-                            <Link to='/dashboard/service/' className='hover:text-amber-400'>خدمات</Link>
-                            {/* <Link className='hover:text-amber-400'>کالاها</Link> */}
-                            {/* <Link className='hover:text-amber-400'>انبار</Link> */}
+                            <Link to='/dashboard/service/service' className='hover:text-amber-400'>خدمات</Link>
+                        </section>
+                    </section>
+                    <section className='dropdown-group'>
+                        <section id='8' onClick={(e) => submenuHandle(e)} className='flex items-center justify-between w-full cursor-pointer'>
+                            <div className="flex items-center gap-x-2">
+                                <FontAwesomeIcon icon={['fas', 'shop']} flip='horizontal' />
+                                <span>فروشگاه</span>
+                            </div>
+                            <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
+                        </section>
+                        <section className={activeMenu === 8 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
+                            <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            {/* <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم محصول</Link> */}
+                            <Link className='hover:text-amber-400'>برندها</Link>
+                            <Link className='hover:text-amber-400'>محصولات</Link>
+                            <Link className='hover:text-amber-400'>انبار</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>
@@ -280,8 +285,11 @@ const Sidebar = () => {
                             <FontAwesomeIcon icon={['fas', 'home']} />
                         </Link>
                         {/* shopping links start */}
-                        <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='vitreen'>
+                        <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='services'>
                             <FontAwesomeIcon icon={['fas', 'chart-bar']} flip='horizontal' />
+                        </section>
+                        <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='shop'>
+                            <FontAwesomeIcon icon={['fas', 'shop']} flip='horizontal' />
                         </section>
                         <section onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={e => showSubmenu(e)} id='orders'>
                             <FontAwesomeIcon icon={['fas', 'bars']} />
@@ -333,17 +341,27 @@ const Sidebar = () => {
                     <FontAwesomeIcon className={isOpenSidebar ? 'text-[8px] group-hover:text-base text-amber-200 dark:text-zinc-100 mytransition' : 'rotate-180 text-[8px] group-hover:text-base text-amber-200 dark:text-zinc-100 mytransition'} icon={['fas', 'angle-right']} />
                 </div>
                 {/* sidbar button end */}
-                {/* vitreen modal menu start */}
-                <section id='vitreen2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('vitreen')} className={showSubMenu === 'vitreen' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
-                    <div className='text-amber-400 pb-1 border-b border-purple-400'>ویترین</div>
+                {/* services modal menu start */}
+                <section id='services2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('services')} className={showSubMenu === 'services' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
+                    <div className='text-amber-400 pb-1 border-b border-purple-400'>خدمات</div>
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
-                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/' className='text-white hover:text-amber-400'>خدمات</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/service' className='text-white hover:text-amber-400'>خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>انبار</Link> */}
                 </section>
-                {/* vitreen modal menu end */}
+                {/* services modal menu end */}
+                {/* shop modal menu start */}
+                <section id='shop2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('shop')} className={showSubMenu === 'shop' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
+                    <div className='text-amber-400 pb-1 border-b border-purple-400'>فروشگاه</div>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
+                    {/* <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم محصول</Link> */}
+                    <Link className='text-white hover:text-amber-400'>برندها</Link>
+                    <Link className='text-white hover:text-amber-400'>محصولات</Link>
+                    <Link className='text-white hover:text-amber-400'>انبار</Link>
+                </section>
+                {/* shop modal menu end */}
                 {/* orders modal menu start */}
                 <section id='orders2' onMouseLeave={() => setShowSubMenu(false)} onMouseEnter={() => setShowSubMenu('orders')} className={showSubMenu === 'orders' ? 'absolute right-1/2 text-sm w-32 bg-purple-700 dark:bg-dark-800 rounded-md shadow-md z-[15500] flex flex-col gap-y-1 mt-3 p-2' : 'hidden'}>
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>سفارشات</div>
@@ -487,7 +505,7 @@ const Sidebar = () => {
                         <section id='1' onClick={(e) => submenuHandle(e)} className='flex items-center justify-between w-full cursor-pointer'>
                             <div className="flex items-center gap-x-2">
                                 <FontAwesomeIcon icon={['fas', 'chart-bar']} flip='horizontal' />
-                                <span>ویترین</span>
+                                <span>خدمات</span>
                             </div>
                             <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
@@ -495,9 +513,25 @@ const Sidebar = () => {
                             <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
-                            <Link to='/dashboard/service/' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
+                            <Link to='/dashboard/service/service' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کالاها</Link> */}
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>انبار</Link> */}
+                        </section>
+                    </section>
+                    <section className='dropdown-group'>
+                        <section id='8' onClick={(e) => submenuHandle(e)} className='flex items-center justify-between w-full cursor-pointer'>
+                            <div className="flex items-center gap-x-2">
+                                <FontAwesomeIcon icon={['fas', 'shop']} flip='horizontal' />
+                                <span>فروشگاه</span>
+                            </div>
+                            <FontAwesomeIcon className={activeMenu === 8 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
+                        </section>
+                        <section className={activeMenu === 8 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
+                            <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
+                            {/* <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم محصول</Link> */}
+                            <Link className='hover:text-amber-400'>برندها</Link>
+                            <Link className='hover:text-amber-400'>محصولات</Link>
+                            <Link className='hover:text-amber-400'>انبار</Link>
                         </section>
                     </section>
                     <section className='dropdown-group'>

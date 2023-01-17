@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams , useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { nanoid } from 'nanoid';
 import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
-import { getServiceCategory, updateCategoryService } from '../../../../service/dashboard/services/getCategoryServices';
+import { getServiceCategories, getServiceCategory, updateCategoryService } from '../../../../service/dashboard/services/getCategoryServices';
+import { Message } from '../../../../context/dashboard/MessageAlertProvider';
+
 const KeyCodes = {
     comma: 188,
     enter: 13
@@ -19,9 +21,13 @@ const CategoryEdit = () => {
     const [category, setCategory] = useState([]);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const [parentId, setParentId] = useState('');
-    const { categories } = useContext(ServiceCategories);
+    const [parentId, setParentId] = useState(null);
+    const [errors, setErrors] = useState([]);
+
+    const { categories, setCategories } = useContext(ServiceCategories);
     const params = useParams();
+    const {setMessage} = useContext(Message);
+    const navigate= useNavigate();
 
     const [data, setData] = useState([]);
     // const [data, setData] = useState({
@@ -73,6 +79,8 @@ const CategoryEdit = () => {
         }
         if(parentId){
             formData.append("parent_id", parentId);
+        }else{
+            formData.append("parent_id", '');
         }
         formData.append("name", data.name);
         formData.append("description", description);
@@ -80,7 +88,13 @@ const CategoryEdit = () => {
         formData.append("tags", saveTags);
         console.log(formData)
         const response = await updateCategoryService(formData, category.id);
-        console.log(response)
+        if(response.status==='success'){
+            setCategories(await getServiceCategories());
+            setMessage(response.message);
+            navigate("/dashboard/service/category/");
+        }else{
+           setErrors(response)
+        }
     }
 
     useEffect(() => {
@@ -108,8 +122,6 @@ const CategoryEdit = () => {
     return (
         <div className='flex flex-col items-center gap-y-4 px-4'>
             {/* breadcrumb start */}
-            {console.log(parentId)}
-            {console.log(data)}
             <section className='flex items-center gap-x-2 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[10px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
                 <p>بخش فروش</p><FontAwesomeIcon className='text-[10px]' icon={['fas', 'angle-double-left']} />
@@ -121,11 +133,12 @@ const CategoryEdit = () => {
             <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش {category.name}</p>
             {/* head page end */}
             {/* form start */}
-            <form action="#" className='form' method="post">
+            <form action="#" className='form' method="post" encType="multipart/form-data">
                 {/* name */}
                 <div className="form-group">
                     <label htmlFor='name'>نام دسته بندی</label>
                     <input id='name' name='name' type='text' value={data.name} onChange={e => setData({ ...data, name: e.target.value })} className='input-form' />
+                    {errors.name && <span className='error-validation'>{errors.name}</span>}
                 </div>
                 {/* parent category */}
                 <div className="form-group">
@@ -138,6 +151,7 @@ const CategoryEdit = () => {
                             ))
                         }
                     </select>
+                    {errors.parent_id && <span className='error-validation'>{errors.parent_id}</span>}
                 </div>
                 {/* status */}
                 <div className="form-group">
@@ -146,11 +160,13 @@ const CategoryEdit = () => {
                         <option value='0'>غیر فعال</option>
                         <option value='1'>فعال</option>
                     </select>
+                    {errors.status && <span className='error-validation'>{errors.status}</span>}
                 </div>
                 {/* image */}
                 <div className="form-group">
                     <label htmlFor='image'>تصویر</label>
                     <input onChange={e => selectFile(e)} id='image' name='image' type='file' className='input-form' />
+                    {errors.image && <span className='error-validation'>{errors.image}</span>}
                     {
                         category.image !== null ? <img src={category.image} alt={category.name} className="w-1/2" /> : ""
                     }
@@ -168,6 +184,7 @@ const CategoryEdit = () => {
                         inputFieldPosition="bottom"
                         autocomplete
                     />
+                    {errors.tags && <span className='error-validation'>{errors.tags}</span>}
                 </div>
                 {/* discription */}
                 <div className="textEditor col-span-8 flex flex-col gap-y-2">
@@ -180,6 +197,7 @@ const CategoryEdit = () => {
                             setDescription(text)
                         }}
                     />
+                    {errors.description && <span className='error-validation'>{errors.description}</span>}
                 </div>
                 <button onClick={e => submit(e)} type='button' className='submitbtn'>ویرایش</button>
             </form>

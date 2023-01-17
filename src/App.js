@@ -4,6 +4,8 @@ import Main from './components/dashboard/main/Main';
 import OpenSidebarProvider from './context/dashboard/OpenSidebarProvider';
 import ThemePanelProvider from './context/dashboard/ThemePanelProvider';
 import ServiceCategoriesProvider from './context/dashboard/ServiceCategoriesProvider';
+import MessageAlertProvider from './context/dashboard/MessageAlertProvider';
+import ServicesProvider from './context/dashboard/ServicesProvider';
 
 function App() {
   return (
@@ -12,7 +14,11 @@ function App() {
         <ThemePanelProvider>
           <Sidebar />
           <ServiceCategoriesProvider>
-            <Main />
+            <MessageAlertProvider>
+              <ServicesProvider>
+                <Main />
+              </ServicesProvider>
+            </MessageAlertProvider>
           </ServiceCategoriesProvider>
         </ThemePanelProvider>
       </OpenSidebarProvider>

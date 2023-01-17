@@ -47,6 +47,9 @@
     .status-red{
         @apply px-2 py-1 text-red-500 bg-red-200 dark:text-red-800 dark:bg-red-400 text-sm rounded-full;
     }
+    .error-validation{
+        @apply text-xs text-rose-600 dark:text-rose-400;
+    }
 }
 
 @tailwind utilities;

@@ -1,15 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState , useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { nanoid } from 'nanoid'
 import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
+import { Message } from '../../../../context/dashboard/MessageAlertProvider';
+import ToastAlert from '../../../../components/dashboard/main/ToastAlert';
+import TrashModal from './TrashModal';
 
 const CategoryIndex = () => {
     const [search, setSearch] = useState('');
     const { categories } = useContext(ServiceCategories);
+    const { message, setMessage } = useContext(Message);
+    const [removeItem, setRemoveItem]= useState({
+        isShowModal: false,
+        id: false
+    });
+
+    const modal= useRef();
+
+    const closeModal = (e) => {
+        if(modal.current && removeItem.isShowModal && !modal.current.contains(e.target)){
+            setRemoveItem({isShowModal:false, id:false})
+        }
+    }
+
+    document.addEventListener('mousedown', closeModal);
+
+    useEffect(() => {
+        if (message) toast(message);
+        return () => { setMessage('') }
+    },[message, setMessage, categories])
 
     return (
-        <div className='flex flex-col items-center gap-y-4 px-4'>
+        <div className='flex flex-col items-center justify-center relative gap-y-4 px-4'>
+            {/* toast alert start */}
+            <ToastAlert />
+            {/* toast alert end */}
             {/* breadcrumb start */}
             <section className='flex items-center gap-x-4 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[12px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
@@ -76,7 +103,7 @@ const CategoryIndex = () => {
                                         </Link>
                                         <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>ویرایش</span>
                                     </div>
-                                    <div className="text-2xl md:text-sm text-rose-700 dark:text-rose-400 hover:text-orange-700 dark:hover:text-purple-400 cursor-pointer relative group">
+                                    <div onClick={()=> setRemoveItem({isShowModal: true, id: category.id})} className="text-2xl md:text-sm text-rose-700 dark:text-rose-400 hover:text-orange-700 dark:hover:text-purple-400 cursor-pointer relative group">
                                         <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'trash']} />
                                         <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>حذف</span>
                                     </div>
@@ -87,6 +114,9 @@ const CategoryIndex = () => {
                 </div>
             </section>
             {/* responsive table end */}
+            {/* trash modal start */}
+            {removeItem.isShowModal&& <span className='absolute' ref={modal}><TrashModal setRemoveItem={setRemoveItem} id={removeItem.id} /></span>}
+            {/* trash modal end */}
         </div>
     );
 };

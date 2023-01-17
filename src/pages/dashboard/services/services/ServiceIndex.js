@@ -1,13 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useContext, useState , useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import img3 from '../../../../assets/images/digital-01.jpg'
+import { nanoid } from 'nanoid'
+import { Message } from '../../../../context/dashboard/MessageAlertProvider';
+import ToastAlert from '../../../../components/dashboard/main/ToastAlert';
+import TrashModal from './TrashModal';
+import { Services } from '../../../../context/dashboard/ServicesProvider';
 
 const ServiceIndex = () => {
     const [search, setSearch] = useState('');
+    const { services } = useContext(Services);
+    const { message, setMessage } = useContext(Message);
+    const [removeItem, setRemoveItem]= useState({
+        isShowModal: false,
+        id: false
+    });
+
+    const modal= useRef();
+
+    const closeModal = (e) => {
+        if(modal.current && removeItem.isShowModal && !modal.current.contains(e.target)){
+            setRemoveItem({isShowModal:false, id:false})
+        }
+    }
+
+    document.addEventListener('mousedown', closeModal);
+
+    useEffect(() => {
+        if (message) toast(message);
+        return () => { setMessage('') }
+    },[message, setMessage, services])
 
     return (
         <div className='flex flex-col items-center gap-y-4 px-4'>
+            {/* toast alert start */}
+            <ToastAlert />
+            {/* toast alert end */}
             {/* breadcrumb start */}
             <section className='flex items-center gap-x-4 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[12px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />
@@ -42,62 +71,68 @@ const ServiceIndex = () => {
                 </div>
                 {/* table */}
                 <div className="flex flex-col gap-2">
-                    <div className="relative grid grid-cols-1 gap-4 px-4 pt-4 pb-6 bg-white border rounded-lg dark:bg-dark-700 border-style md:grid-cols-12">
-                        <div className="flex flex-col items-center gap-4 md:flex-row md:col-span-1">
-                            {/* image */}
-                            <div className="relative">
-                                <img src={img3} alt="avatar" className="w-12 h-12 rounded-full" />
+                    {
+                        services.map(service => (
+                            <div key={nanoid()} className="relative grid grid-cols-1 gap-4 px-4 pt-4 pb-6 bg-white border rounded-lg dark:bg-dark-700 border-style md:grid-cols-12">
+                            <div className="flex flex-col items-center gap-4 md:flex-row md:col-span-1">
+                                {/* image */}
+                                <div className="relative">
+                                    <img src={service.icon} alt="avatar" className="w-12 h-12 rounded-full" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center justify-between md:justify-center md:col-span-4">
-                            <h3 className="text-sm md:hidden"> نام خدمت </h3>
-                            <h3 className="text-sm"> چاپ دیجیتال </h3>
-                        </div>
-                        <div className="flex items-center justify-between md:justify-center md:col-span-3">
-                            <h3 className="text-sm md:hidden"> دسته بندی </h3>
-                            <h3 className="text-sm"> فتوکپی </h3>
-                        </div>
-                        <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
-                            <h3 className="text-sm md:hidden"> وضعیت </h3>
-                            <h3 className="px-2 py-1 text-base md:text-sm text-green-500 bg-green-200 dark:text-green-800 dark:bg-green-400 rounded-full"> فعال </h3>
-                        </div>
-                        <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
-                            <h3 className="text-sm md:hidden"> تعداد انجام شده </h3>
-                            <h3> 56 </h3>
-                        </div>
-                        <div className="flex justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
-                            <div className="text-2xl md:text-sm text-purple-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-purple-400 cursor-pointer relative group">
-                                <Link to='/dashboard/service/edit'>
-                                    <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'edit']} />
-                                </Link>
-                                <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>ویرایش</span>
+                            <div className="flex items-center justify-between md:justify-center md:col-span-4">
+                                <h3 className="text-sm md:hidden"> نام خدمت </h3>
+                                <h3 className="text-sm">{service.name}</h3>
                             </div>
-                            <div className="text-2xl md:text-sm text-rose-700 dark:text-rose-400 hover:text-orange-700 dark:hover:text-purple-400 cursor-pointer relative group">
-                                <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'trash']} />
-                                <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>حذف</span>
+                            <div className="flex items-center justify-between md:justify-center md:col-span-3">
+                                <h3 className="text-sm md:hidden"> دسته بندی </h3>
+                                <h3 className="text-sm">{service.category_name}</h3>
                             </div>
-                            <div className='relative group'>
-                                <span className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md'>
-                                    <div>بیشتر</div>
-                                    <FontAwesomeIcon icon={['fas', 'angle-left']} className='group-hover:-rotate-90 mytransition' />
-                                </span>
-                                <div className="absolute bottom-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
-                                    <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
-                                        <FontAwesomeIcon icon={['fas', 'chess-board']} />
-                                        <div>ویژگی های خدمات</div>
+                            <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
+                                    <h3 className="md:hidden"> وضعیت </h3>
+                                    <h3 className={service.status === 1 ? "status-green" : "status-red"}>{service.status === 1 ? 'فعال' : 'غیر فعال'}</h3>
+                            </div>
+                            <div className="flex items-center justify-between md:justify-center title_color md:col-span-1">
+                                <h3 className="text-sm md:hidden">تعداد انجام شده</h3>
+                                <h3> {service.done_number} </h3>
+                            </div>
+                            <div className="flex justify-center md:px-0 items-center gap-x-4 md:gap-x-2 md:gap-4 md:col-span-2">
+                                <div className="text-2xl md:text-sm text-purple-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-purple-400 cursor-pointer relative group">
+                                    <Link to={`/dashboard/service/edit/${service.id}`}>
+                                        <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'edit']} />
+                                    </Link>
+                                    <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>ویرایش</span>
+                                </div>
+                                <div onClick={()=> setRemoveItem({isShowModal: true, id: service.id})} className="text-2xl md:text-sm text-rose-700 dark:text-rose-400 hover:text-orange-700 dark:hover:text-purple-400 cursor-pointer relative group">
+                                        <FontAwesomeIcon className='group-hover:text-3xl group-hover:md:text-lg mytransition' icon={['fas', 'trash']} />
+                                        <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>حذف</span>
+                                </div>
+                                <div className='relative group'>
+                                    <span className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md'>
+                                        <div>بیشتر</div>
+                                        <FontAwesomeIcon icon={['fas', 'angle-left']} className='group-hover:-rotate-90 mytransition' />
                                     </span>
-                                    <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
-                                        <FontAwesomeIcon icon={['fas', 'chess-board']} />
-                                        <div>ویژگی های خدمات</div>
-                                    </span>
+                                    <div className="absolute bottom-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
+                                        <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                                            <FontAwesomeIcon icon={['fas', 'chess-board']} />
+                                            <div>ویژگی های خدمات</div>
+                                        </span>
+                                        <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
+                                            <FontAwesomeIcon icon={['fas', 'chess-board']} />
+                                            <div>ویژگی های خدمات</div>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                        ))
+                    }
                 </div>
             </section>
             {/* responsive table end */}
+            {/* trash modal start */}
+            {removeItem.isShowModal&& <span className='absolute' ref={modal}><TrashModal setRemoveItem={setRemoveItem} id={removeItem.id} /></span>}
+            {/* trash modal end */}
         </div>
     );
 };
