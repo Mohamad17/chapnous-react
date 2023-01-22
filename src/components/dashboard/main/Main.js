@@ -82,12 +82,13 @@ const Main = () => {
                 {/* services attributes routes start */}
                 <Route path='/dashboard/service/attributes' element={<ServiceAttributeIndex />} />
                 <Route path='/dashboard/service/attributes/create' element={<ServiceAttributeCreate />} />
-                <Route path='/dashboard/service/attributes/edit' element={<ServiceAttributeEdit />} />
+                <Route path='/dashboard/service/attributes/edit/:id' element={<ServiceAttributeEdit />} />
                 {/* services attributes routes end */}
                 {/* services attributes values routes start */}
-                <Route path='/dashboard/service/attributes/value' element={<ServiceAttributeValueIndex />} />
+                <Route path='/dashboard/service/attributes/value/' element={<ServiceAttributeValueIndex />} />
+                <Route path='/dashboard/service/attributes/value/attribute-name/:id' element={<ServiceAttributeValueIndex />} />
                 <Route path='/dashboard/service/attributes/value/create' element={<ServiceAttributeValueCreate />} />
-                <Route path='/dashboard/service/attributes/value/edit' element={<ServiceAttributeValueEdit />} />
+                <Route path='/dashboard/service/attributes/value/edit/:id' element={<ServiceAttributeValueEdit />} />
                 {/* services attributes values routes end */}
                 {/* oeders routes start */}
                 <Route path='/dashboard/orders/:status' element={<OrderIndex />} />

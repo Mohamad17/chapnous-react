@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
+import { Message } from '../../../../context/dashboard/MessageAlertProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { nanoid } from 'nanoid';
-import { Message } from '../../../../context/dashboard/MessageAlertProvider';
 import { ServiceCategories } from '../../../../context/dashboard/ServiceCategoriesProvider';
 import { Services } from '../../../../context/dashboard/ServicesProvider';
 import { getServices , setService } from '../../../../service/dashboard/services/Service';

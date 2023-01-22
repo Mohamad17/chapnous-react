@@ -1,8 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState , useEffect } from 'react';
+import { Link , useNavigate , useParams } from 'react-router-dom';
+import { Message } from '../../../../../context/dashboard/MessageAlertProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AttributeValue } from '../../../../../context/dashboard/AttributeValueProvider';
+import { Attributes } from '../../../../../context/dashboard/AttributeProvider';
+import { nanoid } from 'nanoid'
+import { getAttributeValue, getAttributeValues, updateAttributeValue } from '../../../../../service/dashboard/services/AttributeValue';
 
 const ServiceAttributeValueEdit = () => {
+    const { setAttributeValues } = useContext(AttributeValue);
+    const [currentAttributeValue, setCurrentAttributeValue] = useState([]);
+
+    const { attributes } = useContext(Attributes);
+    const [data, setData] = useState([]);
+    const {setMessage} = useContext(Message);
+    const [errors, setErrors] = useState([]);
+    const navigate= useNavigate();
+    const params = useParams();
+
+    const submit = async(e) => {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append("type", data.type);
+        formData.append("value", data.value);
+        formData.append("select_type", data.select_type);
+        formData.append("status", data.status);
+        formData.append("attribute_id", data.attribute_id);
+        formData.append("_method", "put");
+
+        console.log(formData)
+        const response= await updateAttributeValue(formData, params.id);
+        if(response.status==='success'){
+            setAttributeValues(await getAttributeValues());
+            setMessage(response.message);
+            navigate("/dashboard/service/attributes/value/");
+        }else{
+            setErrors(response)
+        }
+    }
+
+    useEffect(() => {
+        const fetch = async () => {
+            let response = await getAttributeValue(params.id);
+            setCurrentAttributeValue(response);
+            setData(response);
+        }
+        fetch();
+    }, [params])
+
     return (
         <div className='flex flex-col items-center gap-y-4 px-4'>
             {/* breadcrumb start */}
@@ -15,33 +60,57 @@ const ServiceAttributeValueEdit = () => {
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش مقادیر فرم خدمات</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>ویرایش {currentAttributeValue.value}  </p>
             {/* head page end */}
             {/* form start */}
             <form action="#" className='form' method="post">
-                {/* name */}
+                {/* value */}
                 <div className="form-group">
-                    <label htmlFor='name'>مقدار فرم خدمات</label>
-                    <input id='name' name='name' type='text' className='input-form' />
+                    <label htmlFor='value'>مقدار فرم خدمات</label>
+                    <input id='value' name='value' value={data.value} onChange={e => setData({ ...data, value: e.target.value })} type='text' className='input-form' />
+                    {errors.value && <span className='error-validation'>{errors.value}</span>}
                 </div>
-                {/* category */}
+                {/* attribute */}
                 <div className="form-group">
-                    <label htmlFor='parent_id'>فرم خدمت</label>
-                    <select id='parent_id' name='parent_id' className='select-input'>
-                        <option value='1'>چاپ دیجیتال</option>
-                        <option value='2'>چاپ دیجیتال</option>
-                        <option value='3'>چاپ دیجیتال</option>
+                    <label htmlFor='attribute_id'>فرم خدمت</label>
+                    <select onChange={e => setData({ ...data, attribute_id: e.target.value})} value={data.attribute_id} id='attribute_id' name='attribute_id' className='select-input'>
+                        {
+                            attributes.map(attribute=> (
+                                <option key={nanoid()} value={attribute.id}>{attribute.name}</option>
+
+                            ))
+                        }
                     </select>
+                    {errors.attribute_id && <span className='error-validation'>{errors.attribute_id}</span>}
                 </div>
                 {/* status */}
                 <div className="form-group">
                     <label htmlFor='status'>وضعیت</label>
-                    <select id='status' name='status' className='select-input'>
-                        <option value='1'>غیر فعال</option>
-                        <option value='2'>فعال</option>
+                    <select onChange={e => setData({ ...data, status: e.target.value})} value={data.status} id='status' name='status' className='select-input'>
+                        <option value='0'>غیر فعال</option>
+                        <option value='1'>فعال</option>
                     </select>
+                    {errors.status && <span className='error-validation'>{errors.status}</span>}
                 </div>
-                <button type='submit' className='submitbtn'>افزودن</button>
+                {/* type */}
+                <div className="form-group">
+                    <label htmlFor='type'>نوع</label>
+                    <select onChange={e => setData({ ...data, type: e.target.value})} value={data.type} id='type' name='type' className='select-input'>
+                        <option value='0'>ساده</option>
+                        <option value='1'>چند مقداره</option>
+                    </select>
+                    {errors.type && <span className='error-validation'>{errors.type}</span>}
+                </div>
+                {/* select type */}
+                <div className="form-group">
+                    <label htmlFor='select_type'>نوع انتخاب</label>
+                    <select onChange={e => setData({ ...data, select_type: e.target.value})} value={data.select_type} id='select_type' name='select_type' className='select-input'>
+                        <option value='0'>انتخاب تکی</option>
+                        <option value='1'>انتخاب چند تایی</option>
+                    </select>
+                    {errors.select_type && <span className='error-validation'>{errors.select_type}</span>}
+                </div>
+                <button onClick={e => submit(e)} type='button' className='submitbtn'>ویرایش</button>
             </form>
             {/* form end */}
         </div>

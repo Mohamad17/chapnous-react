@@ -87,6 +87,7 @@ const Sidebar = () => {
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' className='hover:text-amber-400'>فرم خدمات</Link>
+                            <Link to='/dashboard/service/attributes/value/' className='hover:text-amber-400'>مقادیر فرم خدمات</Link>
                             <Link to='/dashboard/service/service' className='hover:text-amber-400'>خدمات</Link>
                         </section>
                     </section>
@@ -346,6 +347,7 @@ const Sidebar = () => {
                     <div className='text-amber-400 pb-1 border-b border-purple-400'>خدمات</div>
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/category/' className='text-white hover:text-amber-400'>دسته بندی</Link>
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes' className='text-white hover:text-amber-400'>فرم خدمات</Link>
+                    <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/attributes/value/' className='text-white hover:text-amber-400'>مقادیر فرم خدمات</Link>
                     {/* <Link className='text-white hover:text-amber-400'>برندها</Link> */}
                     {/* <Link className='text-white hover:text-amber-400'>کالاها</Link> */}
                     <Link onClick={() => setShowSubMenu(false)} to='/dashboard/service/service' className='text-white hover:text-amber-400'>خدمات</Link>
@@ -512,6 +514,7 @@ const Sidebar = () => {
                         <section className={activeMenu === 1 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link onClick={() => setIsOpenMobileSidebar(false)} to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>
                             <Link to='/dashboard/service/attributes' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>فرم خدمات</Link>
+                            <Link to='/dashboard/service/attributes/value/' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>مقادیر فرم خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>برندها</Link> */}
                             <Link to='/dashboard/service/service' onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>خدمات</Link>
                             {/* <Link onClick={() => setIsOpenMobileSidebar(false)} className='hover:text-amber-400'>کالاها</Link> */}

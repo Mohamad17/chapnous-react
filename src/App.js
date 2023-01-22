@@ -6,6 +6,8 @@ import ThemePanelProvider from './context/dashboard/ThemePanelProvider';
 import ServiceCategoriesProvider from './context/dashboard/ServiceCategoriesProvider';
 import MessageAlertProvider from './context/dashboard/MessageAlertProvider';
 import ServicesProvider from './context/dashboard/ServicesProvider';
+import AttributeProvider from './context/dashboard/AttributeProvider';
+import AttributeValueProvider from './context/dashboard/AttributeValueProvider';
 
 function App() {
   return (
@@ -16,7 +18,11 @@ function App() {
           <ServiceCategoriesProvider>
             <MessageAlertProvider>
               <ServicesProvider>
-                <Main />
+                <AttributeProvider>
+                  <AttributeValueProvider>
+                    <Main />
+                  </AttributeValueProvider>
+                </AttributeProvider>
               </ServicesProvider>
             </MessageAlertProvider>
           </ServiceCategoriesProvider>
