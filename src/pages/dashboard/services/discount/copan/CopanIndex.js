@@ -6,7 +6,7 @@ const CopanIndex = () => {
     const [search, setSearch] = useState('');
 
     return (
-        <div className='flex flex-col items-center gap-y-4 px-4'>
+        <div className='flex flex-col items-center justify-center gap-y-4 px-4 relative'>
             {/* breadcrumb start */}
             <section className='flex items-center gap-x-4 self-start pb-2 border-b-2 border-purple-700 dark:border-cyan-300 dark:text-zinc-300 text-[12px] md:text-sm'>
                 <Link className='hover:text-purple-600 hover:dark:text-cyan-300' to='/dashboard/'>صفحه اصلی</Link><FontAwesomeIcon icon={['fas', 'angle-double-left']} />

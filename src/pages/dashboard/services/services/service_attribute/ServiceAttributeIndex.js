@@ -6,11 +6,22 @@ import { nanoid } from 'nanoid'
 import { Attributes } from '../../../../../context/dashboard/AttributeProvider';
 import ToastAlert from '../../../../../components/dashboard/main/ToastAlert';
 import { Message } from '../../../../../context/dashboard/MessageAlertProvider';
+import MoreBox from './MoreBox';
 
 const ServiceAttributeIndex = () => {
     const [search, setSearch] = useState('');
     const { attributes } = useContext(Attributes);
     const { message, setMessage } = useContext(Message);
+    const [showMoreBox, setShowMoreBox]= useState(false);
+    // const more= useRef();
+
+    // const closeMore = (e) => {
+    //     if(more.current && showMoreBox && !more.current.contains(e.target)){
+    //         setShowMoreBox(false)
+    //     }
+    // }
+
+    // document.addEventListener('mousedown', closeMore);
 
     useEffect(() => {
         if (message) toast(message);
@@ -76,17 +87,13 @@ const ServiceAttributeIndex = () => {
                                         </Link>
                                         <span className='absolute top-2/3 left-2/3 z-[250] bg-zinc-600 text-zinc-200 text-[12px] justify-center items-center py-1 px-3 rounded-md w-20 hidden group-hover:flex'>ویرایش</span>
                                     </div>
-                                    <div className='relative group'>
-                                        <span className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md'>
+                                    <div className='relative'>
+                                        <span onClick={() => setShowMoreBox(attribute.id)} className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md'>
                                             <div>بیشتر</div>
-                                            <FontAwesomeIcon icon={['fas', 'angle-left']} className='group-hover:-rotate-90 mytransition' />
+                                            <FontAwesomeIcon icon={['fas', 'angle-left']} className={showMoreBox === attribute.id ? '-rotate-90 mytransition': 'mytransition'} />
                                         </span>
-                                        <div className="absolute bottom-1/2 left-1/2 hidden opacity-0 group-hover:opacity-100 w-[13rem] bg-zinc-200 dark:bg-dark-600 group-hover:flex flex-col rounded-md divide-y divide-zinc-400 dark:divide-dark-800 p-2 mytransition">
-                                            <Link to={`/dashboard/service/attributes/value/attribute-name/${attribute.id}`} className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400'>
-                                                <FontAwesomeIcon icon={['fas', 'chess-board']} />
-                                                <div>مقادیر فرم خدمات</div>
-                                            </Link>
-                                        </div>
+                                        {/* more box */}
+                                        <MoreBox setShowMoreBox={setShowMoreBox} showMoreBox={showMoreBox} attributeId={attribute.id} />
                                     </div>
                                 </div>
                             </div>

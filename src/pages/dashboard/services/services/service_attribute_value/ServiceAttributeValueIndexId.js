@@ -7,11 +7,12 @@ import { Message } from '../../../../../context/dashboard/MessageAlertProvider';
 import ToastAlert from '../../../../../components/dashboard/main/ToastAlert';
 import TrashModal from './TrashModal';
 import { AttributeValue } from '../../../../../context/dashboard/AttributeValueProvider';
-import { getAttributeValues } from '../../../../../service/dashboard/services/AttributeValue';
+import { getAttributeValuesById } from '../../../../../service/dashboard/services/AttributeValue';
 
-const ServiceAttributeValueIndex = () => {
+const ServiceAttributeValueIndexId = () => {
     const [search, setSearch] = useState('');
     const { attributeValues, setAttributeValues } = useContext(AttributeValue);
+    const [attributeName, setAttributeName] = useState('');
     const { message, setMessage } = useContext(Message);
     const [removeItem, setRemoveItem] = useState({
         isShowModal: false,
@@ -32,7 +33,11 @@ const ServiceAttributeValueIndex = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            setAttributeValues(await getAttributeValues())
+            let attributeValues = await getAttributeValuesById(params.id);
+            console.log('with id')
+            setAttributeValues(attributeValues.data)
+            setAttributeName(attributeValues.name)
+
         }
         fetch();
         if (message) toast(message);
@@ -53,7 +58,7 @@ const ServiceAttributeValueIndex = () => {
             </section>
             {/* breadcrumb end */}
             {/* head page start */}
-            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>مقادیر فرم خدمات</p>
+            <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'>مقادیر فرم خدمات - {attributeName ?? 'همه'}</p>
             <div className="flex flex-wrap justify-evenly md:justify-between items-center gap-y-4 w-full">
                 <Link to='/dashboard/service/attributes/value/create' className='squareIcon relative group'>
                     <FontAwesomeIcon icon={['fas', 'plus']} />
@@ -117,4 +122,4 @@ const ServiceAttributeValueIndex = () => {
     );
 };
 
-export default ServiceAttributeValueIndex;
+export default ServiceAttributeValueIndexId;
