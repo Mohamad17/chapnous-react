@@ -7,11 +7,10 @@ import { Message } from '../../../../../context/dashboard/MessageAlertProvider';
 import ToastAlert from '../../../../../components/dashboard/main/ToastAlert';
 import TrashModal from './TrashModal';
 import { AttributeValue } from '../../../../../context/dashboard/AttributeValueProvider';
-import { getAttributeValues } from '../../../../../service/dashboard/services/AttributeValue';
 
 const ServiceAttributeValueIndex = () => {
     const [search, setSearch] = useState('');
-    const { attributeValues, setAttributeValues } = useContext(AttributeValue);
+    const { attributeValues } = useContext(AttributeValue);
     const { message, setMessage } = useContext(Message);
     const [removeItem, setRemoveItem] = useState({
         isShowModal: false,
@@ -31,13 +30,9 @@ const ServiceAttributeValueIndex = () => {
     document.addEventListener('mousedown', closeModal);
 
     useEffect(() => {
-        const fetch = async () => {
-            setAttributeValues(await getAttributeValues())
-        }
-        fetch();
         if (message) toast(message);
         return () => { setMessage('') }
-    }, [message, setMessage, params, setAttributeValues])
+    }, [message, setMessage])
 
     return (
         <div className='flex flex-col items-center justify-center gap-y-4 px-4 relative'>

@@ -97,7 +97,7 @@ const Sidebar = () => {
                                 <FontAwesomeIcon icon={['fas', 'shop']} flip='horizontal' />
                                 <span>فروشگاه</span>
                             </div>
-                            <FontAwesomeIcon className={activeMenu === 1 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
+                            <FontAwesomeIcon className={activeMenu === 8 ? '-rotate-90 mytransition' : ''} icon={['fas', 'angle-left']} />
                         </section>
                         <section className={activeMenu === 8 ? 'flex flex-col gap-y-3 mt-3 pr-2 submenu active' : 'submenu'}>
                             <Link to='/dashboard/service/category/' className='hover:text-amber-400'>دسته بندی</Link>

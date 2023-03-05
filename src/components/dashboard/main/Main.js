@@ -61,6 +61,7 @@ import CustomerEdit from '../../../pages/dashboard/user/customer/CustomerEdit';
 import CustomerIndex from '../../../pages/dashboard/user/customer/CustomerIndex';
 import Header from './Header';
 import ServiceAttributeValueIndexId from '../../../pages/dashboard/services/services/service_attribute_value/ServiceAttributeValueIndexId';
+import AttributesServiceCreate from '../../../pages/dashboard/services/services/AttributesServiceCreate';
 
 const Main = () => {
     const { isOpenSidebar } = useContext(IsOpenSideBar);
@@ -79,6 +80,7 @@ const Main = () => {
                 <Route path='/dashboard/service/service' element={<ServiceIndex />} />
                 <Route path='/dashboard/service/create' element={<ServiceCreate />} />
                 <Route path='/dashboard/service/edit/:id' element={<ServiceEdit />} />
+                <Route path='/dashboard/service/create-attributes/:id' element={<AttributesServiceCreate />} />
                 {/* services routes end */}
                 {/* services attributes routes start */}
                 <Route path='/dashboard/service/attributes' element={<ServiceAttributeIndex />} />

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import { Message } from '../../../../context/dashboard/MessageAlertProvider';
 import ToastAlert from '../../../../components/dashboard/main/ToastAlert';
 import TrashModal from './TrashModal';
@@ -25,25 +25,22 @@ const ServiceIndex = () => {
     });
 
     const modalTrash = useRef();
-    const [showMoreBox, setShowMoreBox]= useState(false);
-
-    
+    const [showMoreBox, setShowMoreBox] = useState(false);
 
     const closeModal = (e) => {
         if (modalTrash.current && removeItem.isShowModal && !modalTrash.current.contains(e.target)) {
             setRemoveItem({ isShowModal: false, id: false })
         }
     }
-    // const closeMore = (e) =>{
-    //     if(showMoreBox){
-    //         // console.log(e.target.classList.contains('more'))
-    //         console.log(showMoreBox)
-    //         setShowMoreBox(false)
-    //     }
-    // }
+    const closeMore = (e) =>{
+        if(showMoreBox && !e.target.classList.contains('more')){
+            setShowMoreBox(false)
+        }
+    }
 
+
+    document.addEventListener("mousedown", closeMore)
     document.addEventListener('mousedown', closeModal);
-    // document.addEventListener('mousedown', closeMore);
 
     useEffect(() => {
         if (message) toast(message);
@@ -129,10 +126,12 @@ const ServiceIndex = () => {
                                     <div className='relative'>
                                         <span onClick={() => setShowMoreBox(service.id)} className='flex items-center justify-center gap-x-2 py-1 px-2 cursor-pointer text-base md:text-sm bg-cyan-700 dark:bg-cyan-800 text-zinc-200 rounded-md more'>
                                             <div className='more'>بیشتر</div>
-                                            <FontAwesomeIcon icon={['fas', 'angle-left']} className={showMoreBox === service.id ? '-rotate-90 mytransition more': 'mytransition more'} />
+                                            <FontAwesomeIcon icon={['fas', 'angle-left']} className={showMoreBox === service.id ? '-rotate-90 mytransition more' : 'mytransition more'} />
                                         </span>
                                         {/* more box */}
-                                        <MoreBox service={service} showMoreBox={showMoreBox} setShowMoreBox={setShowMoreBox} setServiceAttributes={setServiceAttributes} />
+                                        <span className='moreBox'> 
+                                            <MoreBox serviceId={service.id} showMoreBox={showMoreBox} setServiceAttributes={setServiceAttributes} />
+                                        </span>
                                     </div>
                                 </div>
                             </div>

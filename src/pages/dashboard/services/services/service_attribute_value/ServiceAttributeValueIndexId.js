@@ -6,12 +6,11 @@ import { nanoid } from 'nanoid'
 import { Message } from '../../../../../context/dashboard/MessageAlertProvider';
 import ToastAlert from '../../../../../components/dashboard/main/ToastAlert';
 import TrashModal from './TrashModal';
-import { AttributeValue } from '../../../../../context/dashboard/AttributeValueProvider';
 import { getAttributeValuesById } from '../../../../../service/dashboard/services/AttributeValue';
 
 const ServiceAttributeValueIndexId = () => {
     const [search, setSearch] = useState('');
-    const { attributeValues, setAttributeValues } = useContext(AttributeValue);
+    const [ attributeValues, setAttributeValues ] = useState([]);
     const [attributeName, setAttributeName] = useState('');
     const { message, setMessage } = useContext(Message);
     const [removeItem, setRemoveItem] = useState({
@@ -34,10 +33,8 @@ const ServiceAttributeValueIndexId = () => {
     useEffect(() => {
         const fetch = async () => {
             let attributeValues = await getAttributeValuesById(params.id);
-            console.log('with id')
             setAttributeValues(attributeValues.data)
             setAttributeName(attributeValues.name)
-
         }
         fetch();
         if (message) toast(message);
