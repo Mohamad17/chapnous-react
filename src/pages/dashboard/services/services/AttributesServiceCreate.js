@@ -1,23 +1,28 @@
-import React, { useEffect , useState , useContext } from 'react';
-import { useParams , Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { updateService, getService } from '../../../../service/dashboard/services/Service';
+import { editServiceAttributes, getService, getServiceAttributes } from '../../../../service/dashboard/services/Service';
 import { Message } from '../../../../context/dashboard/MessageAlertProvider';
-
+import { MultiSelect } from "react-multi-select-component";
+import { getAttributesForOptions } from '../../../../service/dashboard/services/Attribute';
 
 const AttributesServiceCreate = () => {
-    const params= useParams();
+    const params = useParams();
     const [errors, setErrors] = useState([]);
     const [service, setService] = useState([]);
-    const [data, setData] = useState([]);
+    const [serviceAttributes, setServiceAttributes] = useState([]);
+    const [attributes, setAttributes] = useState([]);
     const { setMessage } = useContext(Message);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const submit = async (e) => {
         e.preventDefault();
-        let formData = new FormData();
-        formData.append("name", data.name);
-        const response = await updateService(formData, params.id);
+        let attributesId= [];
+        serviceAttributes.map(attribute => {
+            return attributesId.push(attribute.value);
+        })
+        const response = await editServiceAttributes({"attributes" : attributesId}, params.id);
+        console.log(response)
         if (response.status === 'success') {
             setMessage(response.message);
             navigate("/dashboard/service/service/");
@@ -26,11 +31,21 @@ const AttributesServiceCreate = () => {
         }
     }
     useEffect(() => {
-        const fetch = async () => {
+        const service = async () => {
             let response = await getService(params.id);
             setService(response);
         }
-        fetch();
+        const serviceAttributes = async () => {
+            let serviceAttributes = await getServiceAttributes(params.id);
+            setServiceAttributes(serviceAttributes);
+        }
+        const attributes = async () => {
+            let attributes = await getAttributesForOptions();
+            setAttributes(attributes);
+        }
+        service();
+        serviceAttributes();
+        attributes();
     }, [params])
 
     return (
@@ -47,14 +62,20 @@ const AttributesServiceCreate = () => {
             <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'><span>ایجاد ویژگی های خدمات - </span><span className='font-bold text-cyan-700 dark:text-cyan-400'>{service.name}</span></p>
             {/* head page end */}
             {/* form start */}
-            <form action="#" className='form' method="post" encType="multipart/form-data">
+            <form action="#" className='form' method="post">
                 {/* name */}
                 <div className="form-group">
-                    <label htmlFor='name'>نام خدمت</label>
-                    <input id='name' name='name' type='text' value={data.name} onChange={e => setData({ ...data, name: e.target.value })} className='input-form' />
-                    {errors.name && <span className='error-validation'>{errors.name}</span>}
+                    <label htmlFor='name'>ویژگی های خدمت</label>
+                    <MultiSelect
+                        options={attributes}
+                        value={serviceAttributes}
+                        onChange={setServiceAttributes}
+                        className="dark"
+                        labelledBy="Service Attributes"
+                    />
+                    {errors && <span className='error-validation'>{errors}</span>}
                 </div>
-                
+
                 <button onClick={e => submit(e)} type='button' className='submitbtn'>افزودن</button>
             </form>
             {/* form end */}

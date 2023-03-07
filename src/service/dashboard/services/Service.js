@@ -8,8 +8,24 @@ export const getServices= async() => {
     return response.data.data;
 }
 
+export const getServiceAttributes= async(id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/service-attributes/${id}`;
+    const response= await axios.get(address);
+    const attributes = [];
+    response.data.data.map(item => {
+        let attribute= { label: item.name, value: item.id };
+        return attributes.push(attribute);
+    })
+    return attributes;
+}
+
 export const setService = async(data) => {
     const address= `${BaseApi}v1/dashboard/service/service/store`;
+    const response= await axios.post(address, data);
+    return response.data;
+}
+export const editServiceAttributes = async(data , id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/service-attributes/store/${id}`;
     const response= await axios.post(address, data);
     return response.data;
 }
