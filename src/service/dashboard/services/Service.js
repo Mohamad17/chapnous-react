@@ -19,6 +19,38 @@ export const getServiceAttributes= async(id) => {
     return attributes;
 }
 
+export const getServiceGalleries= async(id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/galleries/${id}`;
+    const response= await axios.get(address);
+    return response.data.data;
+}
+
+export const setServiceGallery = async(data) => {
+    const address= `${BaseApi}v1/dashboard/service/service/galleries/store`;
+    const response= await axios.post(address, data);
+    return response.data;
+}
+export const removeServiceGallery= async (id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/galleries/delete/${id}`;
+    const response= await axios.delete(address);
+    return response.data;
+}
+export const getServiceHelpFiles= async(id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/help-files/${id}`;
+    const response= await axios.get(address);
+    return response.data.data;
+}
+
+export const setServiceHelpFile = async(data) => {
+    const address= `${BaseApi}v1/dashboard/service/service/help-files/store`;
+    const response= await axios.post(address, data);
+    return response.data;
+}
+export const removeServiceHelpFile= async (id) => {
+    const address= `${BaseApi}v1/dashboard/service/service/help-files/delete/${id}`;
+    const response= await axios.delete(address);
+    return response.data;
+}
 export const setService = async(data) => {
     const address= `${BaseApi}v1/dashboard/service/service/store`;
     const response= await axios.post(address, data);

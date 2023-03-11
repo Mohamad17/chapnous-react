@@ -10,14 +10,14 @@ const MoreBox = ({ showMoreBox, serviceId }) => {
                 <FontAwesomeIcon className='attributes more' icon={['fas', 'chess-board']} />
                 <div className='attributes more'>ویژگی های خدمات</div>
             </Link>
-            <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400 more'>
+            <Link to={`/dashboard/service/gallery/${serviceId}`} className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400 more'>
                 <FontAwesomeIcon className='more' icon={['fas', 'images']} />
                 <div className='more'>گالری</div>
-            </span>
-            <span className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400 more'>
+            </Link>
+            <Link to={`/dashboard/service/help-files/${serviceId}`} className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400 more'>
                 <FontAwesomeIcon className='more' icon={['fas', 'file-upload']} />
                 <div className='more'>فایل های راهنما</div>
-            </span>
+            </Link>
         </div>
     );
 };

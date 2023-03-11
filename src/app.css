@@ -50,6 +50,12 @@
     .error-validation{
         @apply text-xs text-rose-600 dark:text-rose-400;
     }
+    .border-gallery{
+        @apply col-span-1 md:col-span-4 lg:col-span-2 border-[8px] border-white dark:border-cyan-800 relative;
+    }
+    .border-help-file{
+        @apply col-span-1 md:col-span-4 border-[8px] border-white dark:border-cyan-800 relative;
+    }
 }
 
 @tailwind utilities;

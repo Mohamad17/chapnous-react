@@ -22,7 +22,6 @@ const AttributesServiceCreate = () => {
             return attributesId.push(attribute.value);
         })
         const response = await editServiceAttributes({"attributes" : attributesId}, params.id);
-        console.log(response)
         if (response.status === 'success') {
             setMessage(response.message);
             navigate("/dashboard/service/service/");
