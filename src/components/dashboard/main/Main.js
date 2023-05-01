@@ -64,6 +64,9 @@ import ServiceAttributeValueIndexId from '../../../pages/dashboard/services/serv
 import AttributesServiceCreate from '../../../pages/dashboard/services/services/AttributesServiceCreate';
 import GalleriesServiceCreate from '../../../pages/dashboard/services/services/GalleriesServiceCreate';
 import HelpFilesServiceCreate from '../../../pages/dashboard/services/services/HelpFilesServiceCreate';
+import ServicePriceIndex from '../../../pages/dashboard/services/services/service_prices/ServicePriceIndex';
+import ServicePriceCreate from '../../../pages/dashboard/services/services/service_prices/ServicePriceCreate';
+import ServicePriceEdit from '../../../pages/dashboard/services/services/service_prices/ServicePriceEdit';
 
 const Main = () => {
     const { isOpenSidebar } = useContext(IsOpenSideBar);
@@ -91,6 +94,11 @@ const Main = () => {
                 <Route path='/dashboard/service/attributes/create' element={<ServiceAttributeCreate />} />
                 <Route path='/dashboard/service/attributes/edit/:id' element={<ServiceAttributeEdit />} />
                 {/* services attributes routes end */}
+                {/* services prices routes start */}
+                <Route path='/dashboard/service/prices/:id' element={<ServicePriceIndex />} />
+                <Route path='/dashboard/service/prices/create/:id' element={<ServicePriceCreate />} />
+                <Route path='/dashboard/service/prices/edit/:id' element={<ServicePriceEdit />} />
+                {/* services prices routes end */}
                 {/* services attributes values routes start */}
                 <Route path='/dashboard/service/attributes/value/' element={<ServiceAttributeValueIndex />} />
                 <Route path='/dashboard/service/attributes/value/attribute-name/:id' element={<ServiceAttributeValueIndexId />} />

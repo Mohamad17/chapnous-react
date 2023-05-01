@@ -18,6 +18,10 @@ const MoreBox = ({ showMoreBox, serviceId }) => {
                 <FontAwesomeIcon className='more' icon={['fas', 'file-upload']} />
                 <div className='more'>فایل های راهنما</div>
             </Link>
+            <Link to={`/dashboard/service/prices/${serviceId}`} className='flex items-center gap-x-4 py-1 cursor-pointer hover:text-purple-600 dark:hover:text-amber-400 more'>
+                <FontAwesomeIcon className='more' icon={['fas', 'dollar-sign']} />
+                <div className='more'>قیمت های خدمات</div>
+            </Link>
         </div>
     );
 };

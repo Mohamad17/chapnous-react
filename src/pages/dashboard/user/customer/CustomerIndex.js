@@ -23,7 +23,7 @@ const CustomerIndex = () => {
                     <span className='tooltip w-40 hidden group-hover:flex'>مشتری  جدید</span>
                 </Link>
                 <p className='dark:text-zinc-300 text-sm'>نمایش 1 تا 10 آیتم از 150 آیتم موجود</p>
-                <div className='justify-self-center md:ustify-self-between relative group flex justify-center items-center'>
+                <div className='justify-self-center md:justify-self-between relative group flex justify-center items-center'>
                     <input type='text' name='search' value={search} onChange={(e) => setSearch(e.target.val)} className='pl-8 py-1 pr-3 outline-none focus:border focus:border-cyan-600 dark:bg-purple-800 dark:text-cyan-300 ring-0 rounded-lg w-full mytransition' />
                     <FontAwesomeIcon icon={['fas', 'search']} className='absolute left-4 text-zinc-600 dark:text-zinc-300 group-focus-within:text-purple-500 mytransition' />
                 </div>
