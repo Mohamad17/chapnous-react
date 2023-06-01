@@ -24,7 +24,6 @@ export const fetchServicePrices = (serviceId) => {
     return (dispatch) => {
         dispatch(fetchServicePricesRequest());
         const address= `${BaseApi}v1/dashboard/service/service-prices/${serviceId}`;
-        console.log(address)
         axios.get(address)
             .then(response => {
                 const servicePrices = response.data.data.data;

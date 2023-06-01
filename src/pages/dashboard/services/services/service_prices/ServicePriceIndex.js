@@ -39,9 +39,9 @@ const ServicePriceIndex = () => {
             {/* head page start */}
             <p className='dark:text-zinc-300 text-xl md:text-2xl self-start'><span>قیمت خدمات</span> - <span className='font-bold text-cyan-800 dark:text-cyan-400'>{servicePricesState.service}</span></p>
             <div className="flex flex-wrap justify-evenly md:justify-between items-center gap-y-4 w-full">
-                <Link to='/dashboard/service/create' className='squareIcon relative group'>
+                <Link to={`/dashboard/service/prices/create/${params.id}`} className='squareIcon relative group'>
                     <FontAwesomeIcon icon={['fas', 'plus']} />
-                    <span className='tooltip w-28 hidden group-hover:flex'>قیمت خدمات جدید</span>
+                    <span className='tooltip w-36 hidden group-hover:flex'>قیمت خدمات جدید</span>
                 </Link>
                 <p className='dark:text-zinc-300 text-sm'>نمایش 1 تا 10 آیتم از 150 آیتم موجود</p>
                 <div className='justify-self-center md:justify-self-between relative group flex justify-center items-center'>
@@ -69,7 +69,7 @@ const ServicePriceIndex = () => {
                                     {/* attribute values */}
                                     <h3 className="text-sm md:hidden"> ویژگی ها </h3>
                                     {servicePrice.attribute_values.map(arrtibuteValue => (
-                                        <div>
+                                        <div key={nanoid()} >
                                             <span><FontAwesomeIcon icon={['fas', 'chevron-circle-left']} /> {arrtibuteValue.attribute}</span> : <span>{arrtibuteValue.value}</span>
                                         </div>
                                     ))}
